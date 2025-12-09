@@ -1,0 +1,25 @@
+# Modern browsers only - No IE support
+# Edge (Chromium) 79+, Chrome 80+, Firefox 78+, Safari 14+
+# iOS Safari 14+, Android Chrome 80+, Samsung Internet 14+
+
+chrome >= 80
+edge >= 79
+firefox >= 78
+safari >= 14
+opera >= 67
+ios_saf >= 14
+and_chr >= 80
+and_ff >= 80
+samsung >= 14
+op_mob >= 64
+
+# Exclude legacy browsers explicitly
+not ie > 0
+not ie_mob > 0
+not op_mini all
+not dead
+not kaios > 0
+not baidu > 0
+not and_qq > 0
+not and_uc > 0
+not bb > 0

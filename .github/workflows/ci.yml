@@ -1,0 +1,77 @@
+name: Integración continua PūrVita
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - '**'
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NEXT_TELEMETRY_DISABLED: 1
+  APP_BASE_URL: ${{ vars.PRODUCTION_BASE_URL || 'https://purvitahealth.com' }}
+
+jobs:
+  calidad:
+    name: Validaciones de calidad
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obtener el repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Revisión de tipos
+        run: npm run typecheck
+
+  pruebas:
+    name: Pruebas y build
+    runs-on: ubuntu-latest
+    needs: calidad
+    steps:
+      - name: Obtener el repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Ejecutar pruebas unitarias
+        run: npm run test -- --run
+
+      - name: Build de producción
+        run: npm run build
+
+  revision_dependencias:
+    name: Revisión de dependencias
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Obtener el repositorio
+        uses: actions/checkout@v4
+
+      - name: Escaneo de dependencias
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: high

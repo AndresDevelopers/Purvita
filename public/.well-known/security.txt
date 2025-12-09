@@ -1,0 +1,5 @@
+Contact: security@purvita.com
+Expires: 2026-01-14T00:00:00.000Z
+Preferred-Languages: en, es
+Canonical: https://purvita.com/.well-known/security.txt
+

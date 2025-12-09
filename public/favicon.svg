@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">PūrVita Favicon</title>
+  <desc id="desc">Rounded gradient background with PV monogram</desc>
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0ea5e9" />
+      <stop offset="100%" stop-color="#6366f1" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#grad)" />
+  <path d="M20 44V20h12.5c5.6 0 9.5 3.6 9.5 8.8 0 5.4-3.9 8.7-9.5 8.7H26v6.5H20zm6-12.6h5.8c2.3 0 3.9-1.4 3.9-3.5s-1.6-3.5-3.9-3.5H26V31.4z" fill="#f8fafc" />
+  <path d="M45 20l-6.4 11.4L45 44h-6.7l-4.4-8-4.4 8H23l6.4-12.6L23 20h6.7l4.2 7.6 4.2-7.6H45z" fill-opacity="0.2" fill="#0f172a" />
+</svg>

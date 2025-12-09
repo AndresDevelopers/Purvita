@@ -1,0 +1,62 @@
+# Dependabot Configuration
+# Automatically checks for dependency updates and security vulnerabilities
+# https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+
+version: 2
+updates:
+  # Enable version updates for npm
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/New_York"
+    # Limit number of open pull requests
+    open-pull-requests-limit: 10
+    # Group updates by type
+    groups:
+      # Group all production dependencies
+      production-dependencies:
+        dependency-type: "production"
+        update-types:
+          - "minor"
+          - "patch"
+      # Group all development dependencies
+      development-dependencies:
+        dependency-type: "development"
+        update-types:
+          - "minor"
+          - "patch"
+    # Automatically merge security updates
+    # Note: This requires GitHub Actions workflow to be set up
+    labels:
+      - "dependencies"
+      - "automated"
+    # Increase version requirements for security updates
+    versioning-strategy: increase
+    # Ignore specific dependencies if needed
+    ignore:
+      # Example: Ignore major version updates for specific packages
+      # - dependency-name: "next"
+      #   update-types: ["version-update:semver-major"]
+    # Commit message prefix
+    commit-message:
+      prefix: "chore"
+      prefix-development: "chore"
+      include: "scope"
+
+  # Enable security updates for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/New_York"
+    labels:
+      - "dependencies"
+      - "github-actions"
+    commit-message:
+      prefix: "ci"
+

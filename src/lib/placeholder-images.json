@@ -1,0 +1,46 @@
+{
+  "placeholderImages": [
+    {
+      "id": "prod1",
+      "description": "A bottle of Quantum Elixir serum.",
+      "imageUrl": "https://picsum.photos/seed/1/600/400",
+      "imageHint": "serum bottle"
+    },
+    {
+      "id": "prod2",
+      "description": "A person wearing the Neuro-Sync Headset.",
+      "imageUrl": "https://picsum.photos/seed/2/600/400",
+      "imageHint": "futuristic headset"
+    },
+    {
+      "id": "prod3",
+      "description": "A close-up of the Chrono-Watch X.",
+      "imageUrl": "https://picsum.photos/seed/3/600/400",
+      "imageHint": "elegant watch"
+    },
+    {
+      "id": "prod4",
+      "description": "A sample of the Bio-Weave Fabric.",
+      "imageUrl": "https://picsum.photos/seed/4/600/400",
+      "imageHint": "technical fabric"
+    },
+    {
+      "id": "prod5",
+      "description": "The Aqua-Purify Bottle in a natural setting.",
+      "imageUrl": "https://picsum.photos/seed/5/600/400",
+      "imageHint": "sleek bottle"
+    },
+    {
+      "id": "prod6",
+      "description": "The Kinetic Charger being used outdoors.",
+      "imageUrl": "https://picsum.photos/seed/6/600/400",
+      "imageHint": "portable charger"
+    },
+    {
+      "id": "hero",
+      "description": "Abstract network graphic representing global connections.",
+      "imageUrl": "https://picsum.photos/seed/99/1200/800",
+      "imageHint": "abstract network"
+    }
+  ]
+}
