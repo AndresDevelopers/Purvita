@@ -25,7 +25,7 @@ const eslintConfig = [
       'src/app/__tests__/__fixtures__/**/*.js',
     ],
   },
-  // Next.js recommended + Core Web Vitals via FlatCompat
+  // Next.js recommended rules (this should work with the plugin detection)
   ...compat.extends('next/core-web-vitals'),
   // TypeScript support
   {

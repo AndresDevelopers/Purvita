@@ -868,6 +868,7 @@ export const adminDictionary = {
         hint: "Enter the page paths where you want this tutorial to appear. Example: /dashboard, /products, /team",
       },
     },
+  },
 
 
     siteContent: {
@@ -1508,4 +1509,4 @@ export const adminDictionary = {
     },
 
 
-  }} as const;
+  } as const;

@@ -22,6 +22,46 @@ export const createDefaultDictionary = (appName: string) => ({
 
   appName,
 
+  errorBoundary: {
+    title: "Something went wrong",
+    message: "An unexpected error occurred. Please try refreshing the page.",
+    description: "An unexpected error occurred. Please try refreshing the page.",
+    action: "Try again",
+    retry: "Try again",
+    goHome: "Go home"
+  },
+
+  adminErrorBoundary: {
+    title: "Something went wrong",
+    message: "We are working to fix it. Try refreshing the view.",
+    action: "Retry",
+  },
+
+  adminConfigStatus: {
+    title: "Configuration Status",
+    description: "Check the status of configured services",
+    stripe: "Stripe",
+    paypal: "PayPal",
+    supabase: "Supabase",
+    email: "Email (Resend)",
+    configured: "Configured",
+    notConfigured: "Not configured",
+    checking: "Checking...",
+    testMode: "Test Mode",
+    productionMode: "Production Mode",
+    inactive: "Inactive",
+  },
+
+  adminDashboardSkeleton: {
+    loading: "Preparing your dashboard...",
+  },
+
+  adminDashboardErrorState: {
+    title: "Could not load dashboard",
+    description: "Check your internet connection and try again.",
+    action: "Try again",
+  },
+
   shopOfficial: "Shop Official Store",
 
   navigation: {
@@ -3705,12 +3745,35 @@ export const createDefaultDictionary = (appName: string) => ({
     cityLabel: "City",
     stateLabel: "State",
     postalCodeLabel: "Postal Code",
+    countryLabel: "Country",
     updateInformation: "Update Information",
     membershipDetails: "Membership Details",
     membershipLevel: "Membership Level",
     joinDate: "Join Date",
     sponsorId: "Sponsor ID",
     sponsorEmail: "Sponsor Email",
+    referralCode: "Referral Code",
+    subscriptionStatus: "Subscription Status",
+    waitlisted: "Waitlisted",
+    affiliateLink: "Affiliate Link",
+    accountSecurity: "Account Security",
+    changePassword: "Change Password",
+    logout: "Logout",
+    shop: "Shop",
+    opportunity: "Opportunity",
+    community: "Community",
+    resources: "Resources",
+    cart: "Cart",
+    viewTeamPerformance: "View Team Performance",
+    networkEarnings: {
+      title: "Network Earnings",
+      description: "Review how much your affiliates have generated and transfer your earnings to your personal balance.",
+      configure: "Configuration",
+      availableLabel: "Available for transfer",
+      breakdownTitle: "Team Contributions",
+      empty: "You don't have team earnings yet. Share your link to start generating commissions.",
+      unknownMember: "Team Member"
+    },
     membershipPhaseLabel: "Phase {{value}}",
     orderHistory: {
       title: "Order History",
@@ -3741,7 +3804,55 @@ export const createDefaultDictionary = (appName: string) => ({
       invoiceErrorDescription: "Unable to load invoice",
       statuses: {}
     },
+    paymentMethods: {
+      title: "Payment Methods",
+      creditDebitCards: "Credit/Debit Cards",
+      addNewCard: "Add New Card",
+      paypal: "PayPal",
+      paypalAccount: "PayPal Account",
+      notLinked: "Not linked",
+      linkPaypalAccount: "Link PayPal Account",
+      defaultMethod: "Default Method",
+      subscriptionGateway: "Subscription Gateway",
+      recentPayments: "Recent Payments",
+      empty: "No payments recorded yet.",
+      table: {
+        date: "Date",
+        amount: "Amount",
+        status: "Status",
+        method: "Method"
+      },
+      statuses: {
+        paid: "Paid",
+        failed: "Failed",
+        refunded: "Refunded"
+      },
+      gateways: {
+        stripe: "Stripe",
+        paypal: "PayPal"
+      }
+    },
     balanceRecharge: {
+      title: "Recharge your balance",
+      description: "Choose a payment method and the amount to add to your account.",
+      providerLabel: "Payment method",
+      amountLabel: "Amount",
+      amountPlaceholder: "0.00",
+      amountHelper: "Minimum recharge {{amount}}",
+      loadingProviders: "Loading providers…",
+      noProviders: "No payment providers are available right now.",
+      providerError: "We could not load payment providers. Please try again.",
+      testModeNote: "Payments use sandbox credentials. Your balance will be updated automatically so you can validate the flow.",
+      liveModeNote: "Complete the payment with your selected provider. Your balance updates automatically once the payment is confirmed.",
+      cancelLabel: "Cancel",
+      submitLabel: "Continue to payment",
+      submittingLabel: "Redirecting…",
+      paymentDescription: "Account balance recharge",
+      triggerLabel: "Recharge balance",
+      modeBadge: {
+        test: "Test mode",
+        live: "Live mode"
+      },
       successToast: {
         title: "Payment received",
         description: "We received your {{provider}} payment. Your balance will refresh shortly."
@@ -3753,27 +3864,442 @@ export const createDefaultDictionary = (appName: string) => ({
       cancelToast: {
         title: "Recharge cancelled",
         description: "No charge was made. You can try again whenever you are ready."
+      },
+      errors: {
+        invalidAmountTitle: "Invalid amount",
+        invalidAmountDescription: "Minimum amount is {{amount}}",
+        paymentFailedTitle: "Payment failed",
+        paymentFailedDescription: "Could not process payment. Please try again.",
+        noProviderTitle: "Select a payment method",
+        noProviderDescription: "Choose PayPal or Stripe to continue.",
+        sessionTitle: "Session expired",
+        sessionDescription: "Sign in again to recharge your balance.",
+        submissionTitle: "Recharge failed",
+        submissionDescription: "We could not start your recharge. Try again shortly."
       }
     },
-    referralSettings: {},
+    referralSettings: {
+      title: "Affiliate Link",
+      description: "Customize the referral code you share with prospects.",
+      codeLabel: "Referral Code",
+      placeholder: "your-team",
+      helper: "Use 4 to 32 characters in lowercase with letters, numbers or hyphens.",
+      save: "Save code",
+      saving: "Saving...",
+      success: "Your referral code has been updated.",
+      reset: "Use generated code",
+      linkLabel: "Share link",
+      copy: "Copy link",
+      copied: "Copied!",
+      copyErrorTitle: "Could not copy link",
+      copyErrorDescription: "Please try copying manually",
+      errorTitle: "Error",
+      errorDescription: "Could not update referral code",
+      errors: {
+        invalidCode: "Invalid referral code format",
+        codeTaken: "This referral code is already taken",
+        updateFailed: "Failed to update referral code",
+        pattern: "Only use letters, numbers or hyphens",
+        minLength: "Referral code must be at least 4 characters",
+        maxLength: "Referral code cannot exceed 32 characters",
+        required: "Referral code is required",
+        generic: "We could not update your referral code. Please try again."
+      },
+      availability: {
+        checking: "Checking availability...",
+        available: "This referral code is available.",
+        current: "This is your current referral code.",
+        unavailable: "This referral code is already taken.",
+        invalid: "Enter a valid code to check availability.",
+        error: "We could not check the code at this moment. Please try again in a few seconds."
+      }
+    },
     phaseRewards: {
-      freeProduct: {},
-      storeCredit: {}
+      title: "Monthly Rewards",
+      description: "Your rewards for maintaining your MLM phase this month",
+      noRewards: "No active rewards this month",
+      noRewardsDescription: "Maintain your MLM phase to unlock monthly rewards",
+      phase: "Phase",
+      freeProduct: {
+        description: "Choose a product up to $65 value",
+        value: "Value",
+        used: "Already used",
+        shopNow: "Shop Now"
+      },
+      storeCredit: {
+        description: "Automatically applied to your purchases",
+        remaining: "Remaining",
+        used: "Used",
+        total: "Total",
+        shopNow: "Shop Now",
+        expiresOn: "Expires on",
+        transferToEarnings: "Transfer to Earnings",
+        transferSuccess: "Rewards transferred successfully",
+        transferError: "Error transferring rewards. Please try again."
+      }
+    },
+    planForm: {
+      basicInfo: "Basic Information",
+      slug: "Slug",
+      slugRequired: "*",
+      slugPlaceholder: "basic-plan",
+      slugHelp: "Unique identifier for the plan (lowercase, no spaces)",
+      price: "Price",
+      priceRequired: "*",
+      pricePlaceholder: "9.99",
+      priceHelp: "Monthly subscription price in USD",
+      multilingualContent: "Multilingual Content",
+      planName: "Plan Name",
+      planNameRequired: "*",
+      description: "Description",
+      descriptionRequired: "*",
+      features: "Features",
+      featurePlaceholder: "Feature",
+      addFeature: "+ Add Feature",
+      planStatus: "Plan Status",
+      planStatusHelp: "Active plans are shown on the subscriptions page",
+      active: "✓ Active",
+      inactive: "○ Inactive",
+      cancel: "Cancel",
+      saving: "Saving...",
+      update: "Update Plan",
+      create: "Create Plan",
+      toast: {
+        incompleteData: "Incomplete Data",
+        planUpdated: "Plan Updated",
+        planUpdatedDescription: "The plan has been updated successfully.",
+        planCreated: "Plan Created",
+        planCreatedDescription: "The plan has been created successfully.",
+        error: "Error",
+        errorSaving: "There was an error saving the plan.",
+      },
+      validation: {
+        slug: "Enter a valid slug for the plan.",
+        nameEn: "Enter the plan name in English.",
+        nameEs: "Enter the plan name in Spanish.",
+        descriptionEn: "Enter the plan description in English.",
+        descriptionEs: "Enter the plan description in Spanish.",
+        featuresEn: "Add at least one feature in English.",
+        featuresEs: "Add at least one feature in Spanish.",
+        price: "Enter a valid price for the plan.",
+        default: "Please check the required fields.",
+      },
+    },
+    videoEdit: {
+      title: "Edit Video",
+      cardTitle: "Edit Class Video",
+      loading: "Loading video...",
+      fields: {
+        title: "Title",
+        titleRequired: "Title *",
+        titlePlaceholder: "Enter video title",
+        description: "Description",
+        descriptionPlaceholder: "Enter an optional description",
+        category: "Category",
+        categoryPlaceholder: "Ex: Fitness, Nutrition, Wellness",
+        categoryHelper: "Optional category to organize videos",
+        visibility: "Visibility",
+        visibilityRequired: "Visibility *",
+        visibilityPlaceholder: "Select who can view the video",
+        visibilityHelper: "Define who can access this video",
+        youtubeId: "YouTube ID",
+        youtubeIdRequired: "YouTube ID *",
+        youtubeIdPlaceholder: "Ex: dQw4w9WgXcQ",
+        youtubeIdHelper: "Enter only the YouTube video ID (the part after 'v=' in the URL)",
+        order: "Order",
+        orderPlaceholder: "0",
+        orderHelper: "Number that determines display order (lower number = appears first)",
+        published: "Published",
+      },
+      visibility: {
+        all: "All authenticated users",
+        subscription: "Only users with active subscription",
+        product: "Only users who purchased a specific product",
+      },
+      actions: {
+        save: "Update Video",
+        saving: "Updating...",
+        cancel: "Cancel",
+      },
+      toast: {
+        notFound: {
+          title: "Video not found",
+          description: "The video you are trying to edit does not exist.",
+        },
+        loadError: {
+          title: "Error",
+          description: "Could not load the video.",
+        },
+        validationError: {
+          title: "Error",
+          description: "Title and YouTube ID are required.",
+        },
+        updateSuccess: {
+          title: "Video updated",
+          description: "The video has been updated successfully.",
+        },
+        updateError: {
+          title: "Error",
+          description: "Could not update the video.",
+        },
+      },
     },
     messages: {}
+  },
+
+  profileEarningsSettings: {
+    title: "Earnings Settings",
+    description: "Manage your payout account and configure automatic transfers.",
+    balanceTitle: "Earnings Summary",
+    balanceDescription: "Check how much you have available to transfer and your current balance.",
+    walletLabel: "Personal Wallet",
+    availableLabel: "Available Earnings",
+    currentBalanceLabel: "Current Balance",
+    transferTitle: "Transfer Earnings",
+    transferDescription: "Choose how much you want to move to your personal balance to use within the platform.",
+    transferAmountLabel: "Amount to Transfer",
+    transferPlaceholder: "0.00",
+    transferHelper: "Available: {{available}}",
+    transferLoading: "Transferring...",
+    transferCta: "Transfer to Balance",
+    transferReset: "Clear",
+    loadError: "Could not load earnings information.",
+    sessionError: "Your session has expired. Please sign in again to continue.",
+    saveError: "Could not save earnings settings.",
+    backToProfile: "Back to Profile",
+    providers: {
+      stripe: {
+        displayName: "Stripe"
+      },
+      paypal: {
+        displayName: "PayPal"
+      },
+      authorize_net: {
+        displayName: "Authorize.Net"
+      },
+      payoneer: {
+        displayName: "Payoneer"
+      }
+    },
+    autoPayout: {
+      title: "Automatic Payouts",
+      description: "Configure automatic transfers to your payout account.",
+      enabled: "Enabled",
+      disabled: "Disabled",
+      configure: "Configure",
+      minimumThreshold: "Minimum threshold",
+      transferSchedule: "Transfer schedule",
+      availableLabel: "Available to payout",
+      thresholdLabel: "Configured threshold",
+      minimumLabel: "Minimum allowed",
+      thresholdInputLabel: "Choose your auto-payout threshold",
+      thresholdHelper: "We will process a payout as soon as you reach {{threshold}}. The minimum allowed is {{minimum}}.",
+      thresholdSave: "Save threshold",
+      thresholdSaving: "Saving...",
+      thresholdSuccessTitle: "Threshold updated",
+      thresholdSuccessDescription: "We will process automatic payouts when you reach {{threshold}}.",
+      thresholdErrorTitle: "Could not update threshold",
+      thresholdError: "We could not save your auto-payout threshold. Please try again in a few minutes.",
+      thresholdInvalid: "Enter a valid amount for your auto-payout threshold.",
+      thresholdBelowMinimum: "The threshold must be at least {{minimum}}.",
+      thresholdUnchangedTitle: "Threshold unchanged",
+      thresholdUnchangedDescription: "That is already your active threshold for automatic payouts.",
+      eligibleMessage: "You have enough balance to generate an automatic payout. The money will reach your {{provider}} account in approximately two business days.",
+      actionCta: "Payout now",
+      processing: "Processing payout...",
+      notEligibleMessage: "You need at least {{threshold}} available to generate a payout. Currently you have {{current}}. The minimum allowed is {{floor}}.",
+      providerNotice: "Payouts are processed with credentials configured by the administrator in {{provider}}.",
+      processedTitle: "Payout processed",
+      processedDescription: "We sent {{amount}} to your {{provider}} account. It should be credited in approximately two business days.",
+      notProcessedTitle: "Payout not processed",
+      notProcessedDescription: "We could not process the automatic payout. Verify you have at least {{threshold}} available in {{provider}}.",
+      errorTitle: "Error processing payout",
+      errorDescription: "We could not process the automatic payout. Please try again in a few minutes."
+    },
+    paymentCadence: {
+      title: "Payout Settings",
+      description: "This configuration is set by the administrator and determines how and when your payouts will be processed.",
+      loading: "Loading configuration...",
+      noConfig: "No payout configuration available.",
+      modeLabel: "Payout Mode",
+      modeAutomatic: "Automatic",
+      modeManual: "Manual",
+      modeAutomaticDescription: "Payouts will be processed automatically according to the configured frequency.",
+      modeManualDescription: "All payouts require manual approval by the administrator before being processed.",
+      frequencyLabel: "Frequency",
+      frequencyWeekly: "Weekly",
+      frequencyBiweekly: "Biweekly",
+      frequencyMonthly: "Monthly",
+      dayOfMonthLabel: "Day of Month",
+      weekdayLabel: "Day of Week",
+      defaultAmountLabel: "Default Amount",
+      remindersLabel: "Reminders",
+      daysBefore: "days before",
+      noReminders: "No reminders",
+      manualModeNotice: "Manual mode active:",
+      manualModeNoticeDescription: "The administrator must manually approve each payout. Automatic payouts are disabled while this mode is active."
+    }
+  },
+
+  subscriptions: {
+    priceSuffix: "/month",
+    title: "Choose Your Plan",
+    subtitle: "Select the perfect plan for your wellness journey",
+    description: "Select the perfect plan for your wellness journey",
+    selectPlan: "Select Plan",
+    mostPopular: "Most Popular",
+    basic: {
+      name: "Basic",
+      title: "Basic",
+      description: "Essential coverage for your wellness journey",
+      feature1: "Access to product catalog",
+      feature2: "Basic wellness programs",
+      feature3: "24/7 customer support",
+      feature4: "Monthly newsletter",
+      feature5: "Community access",
+      features: [
+        "Essential health coverage",
+        "Access to basic wellness programs",
+        "24/7 customer support"
+      ]
+    },
+    pro: {
+      name: "Pro",
+      title: "Pro",
+      description: "Professional coverage for growing needs",
+      feature1: "Extended product catalog",
+      feature2: "Professional wellness programs",
+      feature3: "Priority health coaching",
+      feature4: "Enhanced customer support",
+      feature5: "Professional resources",
+      features: [
+        "Extended health coverage",
+        "Access to professional wellness programs",
+        "Priority health coaching",
+        "Enhanced customer support"
+      ]
+    },
+    premium: {
+      name: "Premium",
+      title: "Premium",
+      description: "Enhanced coverage with personalized support",
+      feature1: "Full product catalog access",
+      feature2: "Advanced wellness programs",
+      feature3: "Personalized health coaching",
+      feature4: "Priority customer support",
+      feature5: "Exclusive content",
+      features: [
+        "Comprehensive health coverage",
+        "Access to advanced wellness programs",
+        "Personalized health coaching",
+        "Priority customer support"
+      ]
+    },
+    elite: {
+      name: "Elite",
+      title: "Elite",
+      description: "Complete coverage with VIP benefits",
+      feature1: "Complete product access",
+      feature2: "All wellness programs",
+      feature3: "Dedicated health advisor",
+      feature4: "VIP customer support",
+      feature5: "Exclusive member benefits",
+      features: [
+        "Full health coverage",
+        "Access to all wellness programs",
+        "Dedicated health advisor",
+        "VIP customer support",
+        "Exclusive member benefits"
+      ]
+    },
+    diamond: {
+      name: "Diamond",
+      title: "Diamond",
+      description: "Ultimate coverage with exclusive benefits",
+      feature1: "Unlimited product access",
+      feature2: "All premium wellness programs",
+      feature3: "Personal health advisor team",
+      feature4: "Concierge customer support",
+      feature5: "Exclusive diamond member benefits",
+      features: [
+        "Ultimate health coverage",
+        "Access to all premium wellness programs",
+        "Personal health advisor team",
+        "Concierge customer support",
+        "Exclusive diamond member benefits"
+      ]
+    },
+    features: {
+      basic: [
+        "Essential health coverage",
+        "Access to basic wellness programs",
+        "24/7 customer support"
+      ],
+      premium: [
+        "Comprehensive health coverage",
+        "Access to advanced wellness programs",
+        "Personalized health coaching",
+        "Priority customer support"
+      ],
+      elite: [
+        "Full health coverage",
+        "Access to all wellness programs",
+        "Dedicated health advisor",
+        "VIP customer support",
+        "Exclusive member benefits"
+      ]
+    }
   },
 
   classesPage: {
     title: "Class Library",
     subtitle: "Themed video lessons exclusive to active paid members.",
     errorTitle: "Error",
-    errorDescription: "Error loading classes"
+    errorDescription: "Error loading classes",
+    lockedTitle: "Activate your subscription to view classes",
+    lockedDescription: "You need to have your payment active to access the class library.",
+    lockedCta: "View plans",
+    watchOnYoutube: "Watch on YouTube",
+    emptyStateTitle: "No classes yet",
+    emptyStateDescription: "Classes are being added. Check back soon!",
+    loadingState: "Loading classes...",
+    duration: "Duration",
+    difficulty: "Difficulty",
+    instructor: "Instructor",
+    playVideo: "Play Video",
+    relatedClasses: "Related Classes"
   },
 
   contact: {
+    title: "Contact Information",
+    subtitle: "Contact Information",
     email: "Email",
     phone: "Phone",
-    hours: "Business Hours"
+    hours: "Business Hours",
+    infoTitle: "Contact Information",
+    defaultHours: "Monday - Friday: 9AM - 6PM",
+    whyContactTitle: "Why Contact Us?",
+    whyContactItems: [
+      "Product inquiries",
+      "Technical support",
+      "Business partnerships",
+      "General questions"
+    ],
+    formTitle: "Contact Us",
+    formDescription: "Send us a message and we'll get back to you as soon as possible.",
+    nameLabel: "Name",
+    emailLabel: "Email",
+    messageLabel: "Message",
+    namePlaceholder: "Your name",
+    emailPlaceholder: "your.email@example.com",
+    messagePlaceholder: "Tell us how we can help you...",
+    submitButton: "Send Message",
+    sendButton: "Send Message",
+    sendingLabel: "Sending...",
+    sending: "Sending...",
+    successMessage: "Message sent successfully! We'll get back to you soon.",
+    errorMessage: "Failed to send message. Please try again.",
+    helperText: "We typically respond within 24 hours."
   },
 
   incomeCalculator: {
@@ -3782,6 +4308,78 @@ export const createDefaultDictionary = (appName: string) => ({
     tabs: {
       multilevel: "Multi-level Network",
       affiliate: "Affiliate System"
+    },
+    multilevel: {
+      title: "Multi-level Network Calculator",
+      subtitle: "Calculate your potential earnings based on your phase and distributor network",
+      initialConfig: "Initial Configuration",
+      phaseLabel: "1. Select your Current Phase",
+      phasePlaceholder: "Select your current phase",
+      noPhases: "No phases configured",
+      phaseOption: "Phase {{level}}: {{name}} - {{commission}}% commission",
+      phaseHelp: "Your phase determines your commission % on all sales",
+      personalSalesLabel: "2. Your Monthly Personal Sales",
+      personalSalesHelp: "How much do you sell directly each month?",
+      phase0AlertTitle: "ℹ️ Phase 0 - Personal Sales Only",
+      phase0AlertBody: "In Phase 0 (Registration) you can only earn commissions from your personal sales. Advance to Phase 1 or higher to unlock the multi-level network and earn from your team.",
+      level1Label: "3. How many people did you invite directly? (Level 1)",
+      level1Placeholder: "Ex: 4",
+      level1Help: "Enter how many people you invited. Other levels will be calculated automatically (each person invites 2 more).",
+      avgSalesLabel: "4. Average Sales per Person in your Network (Optional)",
+      avgSalesPlaceholder: "Ex: 100.00",
+      avgSalesHelp: "If you enter this value, we will also calculate commissions from your team's sales",
+      benefitsLabel: "5. Include Additional Benefits in Calculation",
+      includeRewardCredits: "Include Reward Credits",
+      includeFreeProduct: "Include Free Product Value",
+      benefitsHelp: "These benefits are awarded monthly to each member based on their phase. Enable them to see the total value your network generates.",
+      networkStructure: "Your Distributor Network",
+      calculatedStructure: "📊 Calculated Structure of your Network in Phase {{phase}}",
+      autoDuplication: "Automatic Duplication (each person invites 2):",
+      levelItem: "Level {{level}}",
+      yourInput: "(Your input)",
+      calculated: "(Calculated: {{prev}} × 2)",
+      directInvites: "Your direct invites",
+      indirectInvites: "Invited by Level {{level}}",
+      people: "people",
+      person: "person",
+      totalNetwork: "Total in your network:",
+      calculationNote: "💡 Automatic calculation:",
+      phaseLimitNote: "Your Phase {{phase}} allows up to {{maxPhase}} levels, but the system is configured to show up to {{maxAdmin}} levels.",
+      phaseDepthNote: "In Phase {{phase}} you earn from {{actualMax}} levels deep. Advance to higher phases to unlock more levels (up to {{maxAdmin}} levels).",
+      inputPrompt: "👆 Enter how many people you invited directly (Level 1) to see the full structure of your network calculated automatically.",
+      calculateButton: "Calculate Earnings",
+      resetButton: "Reset",
+      estimatedIncome: "Estimated Total Monthly Income",
+      breakdown: "Breakdown by Level",
+      personalSalesBreakdown: "💼 Your Direct Sales",
+      networkLevelBreakdown: "👥 Level {{level}} - {{name}}",
+      networkCommissionBreakdown: "• Commission on their sales: {{amount}}",
+      rewardCreditsBreakdown: "• Reward Credits: {{amount}}",
+      freeProductBreakdown: "• Free Product Value: {{amount}}"
+    },
+    affiliate: {
+      title: "Affiliate System Calculator",
+      subtitle: "Calculate your earnings as an affiliate and your referrer's earnings",
+      configTitle: "Affiliate Configuration",
+      salesLabel: "Affiliate Sales",
+      salesHelp: "Enter total sales amount generated",
+      affiliateCommissionLabel: "Affiliate Commission (%)",
+      affiliateCommissionHelp: "Percentage the affiliate earns on their sales",
+      referrerCommissionLabel: "Referrer Commission (%)",
+      referrerCommissionHelp: "Percentage the person who referred the affiliate earns",
+      infoAlertTitle: "💡 How does the affiliate system work?",
+      infoAlertBody1: "• As an affiliate, you earn a direct commission for every sale you make",
+      infoAlertBody2: "• The person who referred you also earns a smaller commission on your sales",
+      infoAlertBody3: "• This system incentivizes both your sales and referring new affiliates",
+      calculateButton: "Calculate Affiliate Earnings",
+      totalSystemEarnings: "Total System Earnings",
+      breakdownTitle: "Earnings Breakdown",
+      affiliateEarnings: "💰 Your Earnings as Affiliate",
+      referrerEarnings: "👤 Referrer Earnings",
+      summaryTitle: "📊 Summary:",
+      totalSales: "Total Sales: {{amount}}",
+      affiliateRate: "Affiliate Commission: {{rate}}%",
+      referrerRate: "Referrer Commission: {{rate}}%"
     }
   },
 
@@ -3830,7 +4428,8 @@ export const createDefaultDictionary = (appName: string) => ({
       reason2: "The store has been temporarily disabled",
       reason3: "The affiliate link is incorrect",
       goHome: "Go Home",
-      register: "Create Account"
+      register: "Create Account",
+      shopOfficial: "Shop Official Store",
     }
   },
 

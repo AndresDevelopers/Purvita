@@ -335,6 +335,10 @@ export const createEsDictionary = (
         conversion: {
           title: "Tasas de Conversión",
           description: "Calculamos automáticamente el porcentaje de visitantes que se convierten en clientes.",
+          social: {
+            label: "Redes sociales",
+            labelPlaceholder: "Ej: Síguenos",
+          },
         },
       },
 
@@ -2366,8 +2370,9 @@ export const createEsDictionary = (
 
       invalidResetLink: "Enlace de restablecimiento inválido o expirado",
 
-
-
+      passwordConfirmLabel: "Confirmar Contraseña",
+      passwordConfirmPlaceholder: "Vuelve a ingresar tu contraseña",
+      passwordsDoNotMatch: "Las contraseñas no coinciden",
     },
 
     mfa: {
@@ -2587,15 +2592,12 @@ export const createEsDictionary = (
           },
 
           progress: {
-
             title: "Progreso del equipo",
-
             level1: "Socios activos Nivel 1",
-
             level2: "Socios activos Nivel 2",
-
             helper: "Alcanza 2 socios directos y 4 en tu segundo nivel para desbloquear la Fase 2.",
-
+            retention: "Retención",
+          },
           },
 
 
@@ -3207,6 +3209,7 @@ export const createEsDictionary = (
       paymentServiceUnavailable: "El servicio de pago está temporalmente no disponible. Por favor, intenta más tarde o contacta al administrador para verificar la configuración.",
 
       paymentConfigurationError: "El sistema de pagos no está configurado correctamente. Por favor, contacta al administrador del sitio.",
+      successMessage: "¡Pedido realizado con éxito!",
 
 
 
@@ -3733,6 +3736,13 @@ export const createEsDictionary = (
         errorDeletingPlan: "No se pudo eliminar el plan.",
         errorSettingDefault: "No se pudo establecer el plan por defecto.",
         errorUpdatingOrder: "No se pudo actualizar el orden.",
+        editPlan: "Editar Plan",
+        editPlanDesc: "Editar detalles del plan para",
+        planTitle: "Título del Plan",
+        planPrice: "Precio del Plan",
+        planDescription: "Descripción del Plan",
+        planFeatures: "Características del Plan",
+        planFeaturesPlaceholder: "Ingrese cada característica en una nueva línea",
       },
 
       // Gestión de productos
@@ -3977,6 +3987,7 @@ export const createEsDictionary = (
       videos: "Videos",
 
       tutorials: {
+        menuLabel: "Tutoriales",
         title: "Gestión de Tutoriales",
         description: "Crea y administra tutoriales de incorporación que guíen a los nuevos usuarios a través de la plataforma.",
         form: {
@@ -4022,6 +4033,7 @@ export const createEsDictionary = (
 
 
 
+      subscriptions: "Suscripciones",
       plans: "Planes",
 
 
@@ -4271,8 +4283,12 @@ export const createEsDictionary = (
         retry: "Reintentar",
 
         footerNote:
-
           "Los cambios se reflejan al instante en la landing page y en toda la aplicación.",
+        save: "Guardar",
+        saving: "Guardando...",
+        successTitle: "Cambios guardados",
+        successDescription: "La configuración del sitio se ha actualizado correctamente.",
+        errorDescription: "No pudimos guardar los cambios. Por favor, inténtalo de nuevo.",
 
         submit: {
 
@@ -5020,6 +5036,7 @@ export const createEsDictionary = (
           countriesSearchPlaceholder: "Busca por nombre o código ISO",
           countriesAllDescription:
             'Aplica esta moneda a todos los países que no estén asignados a otra moneda.',
+          countriesAllLabel: "Todos los países",
           countriesUnavailable: "Ya asignado a otra moneda",
           countriesDone: "Listo",
           addCurrency: "Agregar moneda",
@@ -5572,11 +5589,11 @@ export const createEsDictionary = (
 
         saveButton: "Guardar Configuración",
         successTitle: "Éxito",
-        successDescription: "Configuración de scripts de publicidad guardada exitosamente",
+        successDescription: "La configuración de scripts de publicidad se guardó correctamente",
         errorLoading: "Error",
-        errorLoadingDescription: "Error al cargar la configuración de scripts de publicidad",
+        errorLoadingDescription: "No se pudo cargar la configuración de scripts de publicidad",
         errorSaving: "Error",
-        errorSavingDescription: "Error al guardar la configuración de scripts de publicidad",
+        errorSavingDescription: "No se pudo guardar la configuración de scripts de publicidad",
       },
 
       support: "Soporte",
@@ -5623,6 +5640,10 @@ export const createEsDictionary = (
           errorTitle: "Error al desactivar",
           errorDescription: "Inténtalo nuevamente.",
           errorMessage: "No pudimos desactivar el modo seleccionado.",
+        },
+        none: {
+          title: "En línea",
+          description: "Mantén la experiencia completa disponible. Ideal cuando tu tienda está lista para los visitantes.",
         },
         activeBadge: "Activo",
 
@@ -5681,9 +5702,26 @@ export const createEsDictionary = (
           },
 
           placeholders: {
-
             backgroundImage: "https://ejemplo.com/portada.jpg",
-
+          },
+          social: {
+            title: "Redes sociales",
+            description: "Comparte los perfiles donde tu audiencia puede seguir tus actualizaciones.",
+            add: "Agregar enlace social",
+            remove: "Eliminar enlace social",
+            label: "Etiqueta",
+            labelPlaceholder: "Instagram",
+            platform: "Plataforma",
+            platformPlaceholder: "Selecciona una plataforma",
+            platforms: {
+              facebook: "Facebook",
+              instagram: "Instagram",
+              youtube: "YouTube",
+              x: "X (Twitter)",
+              whatsapp: "WhatsApp",
+            },
+            url: "URL",
+            urlPlaceholder: "https://instagram.com/tumarca",
           },
 
           backgroundHelper:
@@ -5738,7 +5776,18 @@ export const createEsDictionary = (
             helper: "Solo esta ruta exacta permitirá ingresar al administrador mientras el modo esté activo.",
 
           },
-
+          appearanceSection: {
+            title: "Acceso y fondo",
+            description: "Mantén listo el acceso para el equipo y los elementos visuales mientras el modo esté activo.",
+            fields: {
+              password: "Contraseña de acceso",
+              backgroundImage: "Imagen de fondo (URL)",
+            },
+            social: {
+              label: "Redes sociales",
+              labelPlaceholder: "Ej: Síguenos",
+            },
+          },
         },
 
         comingSoonSettings: {
@@ -5964,12 +6013,26 @@ export const createEsDictionary = (
         menuLabel: "Páginas",
         title: "Editor de Páginas",
         description: "Edita y gestiona las páginas de tu sitio web incluyendo la landing page.",
+        errorLoading: "No se pudo cargar la configuración de la página",
+        errorTitle: "No se pudo cargar la información",
+        localeLabel: "Idioma del contenido",
+        retry: "Reintentar",
         tabs: {
           landing: "Landing Page",
           team: "Página de Equipo",
           contact: "Página de Contacto",
           privacy: "Política de Privacidad",
           terms: "Términos de Servicio",
+        },
+        toast: {
+          success: {
+            title: "Configuración actualizada",
+            description: "Los cambios se guardaron correctamente.",
+          },
+          error: {
+            title: "Error al actualizar",
+            description: "No se pudieron guardar los cambios.",
+          },
         },
       },
 
@@ -7709,17 +7772,7 @@ export const createEsDictionary = (
 
 
           maxLength: "El código de referido debe tener máximo 32 caracteres.",
-
-
-
-          conflict: "Ese código de referido ya está en uso. Prueba con otro.",
-
-
-
           generic: "No pudimos actualizar tu código de referido. Intenta nuevamente.",
-
-
-
         },
 
 
@@ -7765,14 +7818,12 @@ export const createEsDictionary = (
         noRewardsDescription: "Mantén tu fase MLM para desbloquear recompensas mensuales",
         phase: "Fase",
         freeProduct: {
-          title: "Producto Gratis",
           description: "Elige un producto de hasta $65 de valor",
           value: "Valor",
           used: "Ya usado",
           shopNow: "Comprar Ahora",
         },
         storeCredit: {
-          title: "Crédito de Tienda",
           description: "Se aplica automáticamente a tus compras",
           remaining: "Restante",
           used: "Usado",
@@ -7898,36 +7949,12 @@ export const createEsDictionary = (
 
         tracking: {
           empty: "Aún no hay seguimiento disponible.",
-
-
-
           updated: "Actualizado {{value}}",
-
-
-
           company: "Empresa responsable",
-
-
-
           code: "Código de seguimiento",
-
-
-
           location: "Ubicación actual",
-
-
-
           eta: "Entrega estimada",
-
-
-
         },
-
-
-
-        statusCompleted: "Completado",
-
-
 
         statuses: {
 
@@ -8207,92 +8234,20 @@ export const createEsDictionary = (
       walletLabel: 'Saldo personal',
       providers: {
         stripe: {
-          title: 'Stripe',
-          tabLabel: 'Stripe',
           displayName: 'Stripe',
-          description: 'Conecta Stripe para recibir tus pagos directamente en la cuenta que vincules.',
-          helper: 'Tu cuenta de Stripe está lista para recibir pagos automáticos.',
-          helperMissing: 'Vincula Stripe para enviar tus ganancias a tu cuenta bancaria.',
-          loading: 'Conectando Stripe…',
-          cta: 'Conectar Stripe',
-          successTitle: 'Cuenta de Stripe conectada',
-          successDescription: 'Tu cuenta de Stripe quedó vinculada. Completa el onboarding en Stripe para activar los pagos.',
-          errorTitle: 'No pudimos conectar Stripe',
-          errorDescription: 'No pudimos conectar con Stripe. Inténtalo de nuevo en unos minutos.',
-          providerMismatch: 'Desconecta tu método de pago actual antes de vincular Stripe.',
-          disconnectCta: 'Desconectar Stripe',
-          disconnecting: 'Desconectando…',
-          disconnectSuccessTitle: 'Stripe desconectado',
-          disconnectSuccessDescription:
-            'Eliminamos la conexión con Stripe. Vuelve a vincularla cuando quieras recibir pagos.',
-          disconnectErrorTitle: 'No pudimos desconectar Stripe',
-          disconnectErrorDescription:
-            'No pudimos desconectar tu cuenta de Stripe. Inténtalo nuevamente en unos minutos.',
         },
         paypal: {
-          title: 'Pagos con PayPal',
-          tabLabel: 'PayPal',
           displayName: 'PayPal',
-          description: 'Agrega tu cuenta de PayPal para recibir tus ganancias mediante PayPal.',
-          helper: 'Tu cuenta de PayPal está lista para recibir pagos.',
-          helperMissing: 'Ingresa el correo de PayPal donde quieres recibir tus pagos.',
-          loading: 'Guardando cuenta de PayPal…',
-          cta: 'Guardar cuenta de PayPal',
-          updateCta: 'Actualizar cuenta de PayPal',
-          successTitle: 'Cuenta de PayPal guardada',
-          successDescription: 'Configuramos tus pagos por PayPal. Las próximas transferencias se enviarán a tu correo.',
-          errorTitle: 'Falló la conexión con PayPal',
-          errorDescription: 'No pudimos guardar tu información de PayPal. Inténtalo de nuevo en unos minutos.',
-          providerMismatch: 'Desconecta tu método de pago actual antes de vincular PayPal.',
-          disconnectCta: 'Desconectar PayPal',
-          disconnecting: 'Desconectando…',
-          disconnectSuccessTitle: 'PayPal desconectado',
-          disconnectSuccessDescription:
-            'Eliminamos la conexión con PayPal. Vincula otra cuenta cuando lo necesites.',
-          disconnectErrorTitle: 'No pudimos desconectar PayPal',
-          disconnectErrorDescription:
-            'No pudimos desconectar tu cuenta de PayPal. Inténtalo nuevamente en unos minutos.',
-          emailLabel: 'Correo de PayPal',
-          emailPlaceholder: 'tucorreo@paypal.com',
-          emailHelper: 'Usaremos este correo para enviarte las transferencias vía PayPal.',
-          emailInvalid: 'Ingresa un correo electrónico de PayPal válido.',
-          currentAccountLabel: 'Cuenta de PayPal actual: {{email}}',
+        },
+        authorize_net: {
+          displayName: 'Authorize.Net',
+        },
+        payoneer: {
+          displayName: 'Payoneer',
         },
       },
-      methodsTitle: 'Métodos de cobro',
-      methodsDescription: 'Elige cómo quieres recibir tus pagos. Vincula o desvincula Stripe y PayPal cuando lo necesites.',
-      methodsDescriptionBase: 'Elige cómo quieres recibir tus pagos. Vincula o desvincula',
-      methodsDescriptionAnd: 'y',
-      methodsDescriptionEnd: 'cuando lo necesites.',
-      payoutUnavailableTitle: 'Pagos no disponibles',
-      noProviderConfigured: 'No hay proveedores de pago habilitados. Contacta al administrador para continuar.',
-      providersLoading: 'Cargando opciones de pago…',
-      providersError: 'No pudimos cargar los proveedores de pago. Intenta más tarde.',
-      statusLabels: {
-        pending: 'Pendiente de verificación',
-        active: 'Lista para recibir pagos',
-        restricted: 'Acción requerida en el proveedor',
-        disabled: 'Cuenta de pagos deshabilitada',
-        none: 'Sin método de pago conectado',
-      },
-      transferTitle: 'Transferir ganancias',
-      transferDescription: 'Elige cuánto mover a tu saldo personal para usarlo en la plataforma.',
-      transferAmountLabel: 'Monto a transferir',
-      transferPlaceholder: '0.00',
-      transferHelper: 'Disponible: {{available}}',
-      transferCta: 'Transferir al saldo',
-      transferLoading: 'Transfiriendo…',
-      transferReset: 'Limpiar',
-      transferInvalid: 'Ingresa un monto válido mayor a cero.',
-      transferExceeds: 'No tienes ganancias suficientes para esa transferencia.',
-      transferErrorTitle: 'Transferencia fallida',
-      transferError: 'No pudimos mover los fondos a tu saldo. Inténtalo nuevamente en unos minutos.',
-      transferSuccessTitle: 'Transferencia completada',
-      transferSuccessDescription: 'Movimos {{amount}} a tu saldo personal.',
       autoPayout: {
         title: 'Pago automático',
-        threshold:
-          'Recibe tus ganancias en automático cuando alcances {{threshold}} en {{provider}}. El mínimo permitido es {{minimum}}.',
         availableLabel: 'Disponible para cobrar',
         thresholdLabel: 'Umbral configurado',
         minimumLabel: 'Mínimo permitido',
@@ -8395,8 +8350,12 @@ export const createEsDictionary = (
     errorBoundary: {
       title: "Algo salió mal",
       message: "Ha ocurrido un error inesperado. Por favor, recarga la página.",
+      description: "Ha ocurrido un error inesperado. Por favor, recarga la página.",
       action: "Recargar página",
+      retry: "Reintentar",
+      goHome: "Ir al inicio",
     },
+    shopOfficial: "Tienda Oficial",
     adminErrorBoundary: {
       title: "Algo salió mal",
       message: "Estamos trabajando para solucionarlo. Intenta actualizar la vista.",
