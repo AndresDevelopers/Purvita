@@ -12,7 +12,7 @@ module.exports = {
       jsx: true,
     },
   },
-  plugins: ['@typescript-eslint'],
+  plugins: ['@typescript-eslint', '@next/next'],
   extends: [
     'next/core-web-vitals',
     'eslint:recommended',

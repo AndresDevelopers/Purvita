@@ -96,8 +96,8 @@ export default function EditVideoPage({ params, searchParams }: EditVideoPagePro
             if (!response.ok) {
                 if (response.status === 404) {
                     toast({
-                        title: dict.admin.videoEdit.toast.notFound.title,
-                        description: dict.admin.videoEdit.toast.notFound.description,
+                        title: (dict.admin.videoEdit.toast as any).notFound.title,
+                        description: (dict.admin.videoEdit.toast as any).notFound.description,
                         variant: 'destructive',
                     });
                     router.push(`/admin/videos?lang=${lang}`);
@@ -129,14 +129,14 @@ export default function EditVideoPage({ params, searchParams }: EditVideoPagePro
         } catch (error) {
             console.error('Error loading video:', error);
             toast({
-                title: dict.admin.videoEdit.toast.loadError.title,
-                description: dict.admin.videoEdit.toast.loadError.description,
+                title: (dict.admin.videoEdit.toast as any).loadError.title,
+                description: (dict.admin.videoEdit.toast as any).loadError.description,
                 variant: 'destructive',
             });
         } finally {
             setFetchLoading(false);
         }
-    }, [resolvedParams.id, toast, dict.admin.videoEdit.toast.loadError.title, dict.admin.videoEdit.toast.loadError.description, dict.admin.videoEdit.toast.notFound.title, dict.admin.videoEdit.toast.notFound.description, router, lang]);
+    }, [resolvedParams.id, toast, dict.admin.videoEdit.toast, router, lang]);
 
     useEffect(() => {
         loadVideo();
@@ -153,8 +153,8 @@ export default function EditVideoPage({ params, searchParams }: EditVideoPagePro
 
         if (!hasValidTranslation || !formData.youtube_id.trim()) {
             toast({
-                title: dict.admin.videoEdit.toast.validationError.title,
-                description: dict.admin.videoEdit.toast.validationError.description,
+                title: (dict.admin.videoEdit.toast as any).validationError.title,
+                description: (dict.admin.videoEdit.toast as any).validationError.description,
                 variant: 'destructive',
             });
             return;
@@ -171,16 +171,16 @@ export default function EditVideoPage({ params, searchParams }: EditVideoPagePro
             }
 
             toast({
-                title: dict.admin.videoEdit.toast.updateSuccess.title,
-                description: dict.admin.videoEdit.toast.updateSuccess.description,
+                title: (dict.admin.videoEdit.toast as any).updateSuccess.title,
+                description: (dict.admin.videoEdit.toast as any).updateSuccess.description,
             });
 
             router.push(`/admin/videos?lang=${lang}`);
         } catch (error: any) {
             console.error('Error updating video:', error);
             toast({
-                title: dict.admin.videoEdit.toast.updateError.title,
-                description: error instanceof Error ? error.message : dict.admin.videoEdit.toast.updateError.description,
+                title: (dict.admin.videoEdit.toast as any).updateError.title,
+                description: error instanceof Error ? error.message : (dict.admin.videoEdit.toast as any).updateError.description,
                 variant: 'destructive',
             });
         } finally {
@@ -232,7 +232,7 @@ export default function EditVideoPage({ params, searchParams }: EditVideoPagePro
             <div className="flex items-center justify-center min-h-64">
                 <div className="text-center">
                     <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
-                    <p>{dict.admin.videoEdit.loading}</p>
+                    <p>{(dict.admin.videoEdit as any).loading ?? 'Loading...'}</p>
                 </div>
             </div>
         );
@@ -246,7 +246,7 @@ export default function EditVideoPage({ params, searchParams }: EditVideoPagePro
                         <ArrowLeft className="h-4 w-4" />
                     </Link>
                 </Button>
-                <h1 className="text-3xl font-bold font-headline">{dict.admin.videoEdit.title}</h1>
+                <h1 className="text-3xl font-bold font-headline">{(dict.admin.videoEdit as any).title ?? 'Edit Video'}</h1>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -255,7 +255,7 @@ export default function EditVideoPage({ params, searchParams }: EditVideoPagePro
                     <CardHeader>
                         <div className="flex items-center gap-2">
                             <Languages className="h-5 w-5" />
-                            <CardTitle>{dict.admin.videoEdit.cardTitle}</CardTitle>
+                            <CardTitle>{(dict.admin.videoEdit as any).cardTitle}</CardTitle>
                         </div>
                         <CardDescription>
                             {dict.admin.videoEdit.fields.titleRequired} - {dict.admin.videoEdit.fields.description}
@@ -402,7 +402,7 @@ export default function EditVideoPage({ params, searchParams }: EditVideoPagePro
                 <div className="flex gap-4">
                     <Button type="submit" disabled={loading}>
                         <Save className="mr-2 h-4 w-4" />
-                        {loading ? dict.admin.videoEdit.actions.saving : dict.admin.videoEdit.actions.save}
+                        {loading ? (dict.admin.videoEdit.actions as any).saving : (dict.admin.videoEdit.actions as any).save}
                     </Button>
                     <Button type="button" variant="outline" asChild>
                         <Link href={`/admin/videos?lang=${lang}`}>

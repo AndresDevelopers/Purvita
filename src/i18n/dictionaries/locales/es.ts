@@ -335,10 +335,6 @@ export const createEsDictionary = (
         conversion: {
           title: "Tasas de Conversión",
           description: "Calculamos automáticamente el porcentaje de visitantes que se convierten en clientes.",
-          social: {
-            label: "Redes sociales",
-            labelPlaceholder: "Ej: Síguenos",
-          },
         },
       },
 
@@ -2596,40 +2592,7 @@ export const createEsDictionary = (
             level1: "Socios activos Nivel 1",
             level2: "Socios activos Nivel 2",
             helper: "Alcanza 2 socios directos y 4 en tu segundo nivel para desbloquear la Fase 2.",
-            retention: "Retención",
           },
-          },
-
-
-
-          networkOverview: {
-            title: "Visión general de la red",
-            helper: "Supervisa el desempeño de tus referidos de primer y segundo nivel.",
-            loading: "Cargando tus métricas de red...",
-            empty: "Invita a tus primeros referidos para ver estadísticas aquí.",
-            metrics: {
-              total: "Socios totales",
-              active: "Socios activos",
-              waitlisted: "En lista de espera",
-              inactive: "Requieren atención",
-            },
-            level: {
-              heading: "Nivel {{level}}",
-              active: "Activos",
-              waitlisted: "En espera",
-              inactive: "Requieren atención",
-            },
-            members: {
-              title: "Referidos recientes",
-              empty: "Aún no has inscrito miembros en tu red.",
-              phase: "Fase {{phase}}",
-              phaseUnknown: "Fase pendiente",
-              status: {
-                active: "Activo",
-                waitlisted: "En lista de espera",
-                inactive: "Requiere atención",
-              },
-            },
           },
 
           affiliate: {
@@ -3073,10 +3036,6 @@ export const createEsDictionary = (
 
 
       },
-
-
-
-    },
 
 
 
@@ -8463,4 +8422,4 @@ export const createEsDictionary = (
         referrerRate: "Comisión referidor: {{rate}}%"
       }
     },
-    }) satisfies DictionaryOverrides;
+  } satisfies DictionaryOverrides);

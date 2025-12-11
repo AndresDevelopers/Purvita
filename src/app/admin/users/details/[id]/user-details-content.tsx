@@ -93,7 +93,7 @@ export function UserDetailsContent({ userId, lang, dict, initialUser }: UserDeta
       <Button variant="ghost" asChild className="mb-4">
         <Link href={`/admin/users?lang=${lang}`}>
           <ChevronLeft className="mr-2 h-4 w-4" />
-          {dict.admin.backToUsers}
+          {(dict.admin as any).backToUsers ?? 'Back to Users'}
         </Link>
       </Button>
       {error && (
@@ -117,7 +117,7 @@ export function UserDetailsContent({ userId, lang, dict, initialUser }: UserDeta
             <Button asChild variant="outline">
               <Link href={`/admin/users/edit/${initialUser.id}?lang=${lang}`}>
                 <Edit className="mr-2 h-4 w-4" />
-                {dict.admin.editUser}
+                {(dict.admin as any).editUser ?? 'Edit User'}
               </Link>
             </Button>
           </div>

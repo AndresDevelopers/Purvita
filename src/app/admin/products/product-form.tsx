@@ -49,9 +49,9 @@ type ExperienceLocaleState = {
 
 type ReviewSource = 'admin' | 'member';
 
-type ReviewState = {
+interface ReviewState {
   id: string;
-  user_id?: string;
+  user_id: string;
   author: string;
   avatarUrl: string;
   locale: Locale;
@@ -59,6 +59,7 @@ type ReviewState = {
   timeAgo: string;
   comment: string;
   source: ReviewSource;
+  createdAt?: string;
 };
 
 interface ExperienceState {
@@ -267,7 +268,7 @@ export function ProductForm({ lang, product, onSuccess }: ProductFormProps) {
         ...prev.reviews,
         {
           id: createClientId(),
-          user_id: undefined,
+          user_id: '',
           author: '',
           avatarUrl: '',
           locale: lang,
@@ -394,7 +395,7 @@ export function ProductForm({ lang, product, onSuccess }: ProductFormProps) {
 
         return {
           id: review.id ?? createClientId(),
-          user_id: review.user_id,
+          user_id: review.user_id || '',
           author: review.author.trim(),
           avatarUrl: sanitizedAvatar.length > 0 ? sanitizedAvatar : undefined,
           locale: review.locale,
@@ -402,7 +403,7 @@ export function ProductForm({ lang, product, onSuccess }: ProductFormProps) {
           timeAgo: sanitizedTimeAgo.length > 0 ? sanitizedTimeAgo : undefined,
           comment: review.comment.trim(),
           source: review.source ?? 'admin',
-          createdAt: null,
+          createdAt: review.createdAt || new Date().toISOString(),
         };
       });
 
@@ -599,7 +600,7 @@ export function ProductForm({ lang, product, onSuccess }: ProductFormProps) {
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-2">
-          <Label htmlFor="price">{dict.admin.price}</Label>
+          <Label htmlFor="price">{(dict.admin as any).price ?? 'Price'}</Label>
           <Input
             id="price"
             name="price"
@@ -611,7 +612,7 @@ export function ProductForm({ lang, product, onSuccess }: ProductFormProps) {
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="stock_quantity">{dict.admin.stockQuantity}</Label>
+          <Label htmlFor="stock_quantity">{(dict.admin as any).stockQuantity ?? 'Stock Quantity'}</Label>
           <Input
             id="stock_quantity"
             name="stock_quantity"
@@ -801,8 +802,8 @@ export function ProductForm({ lang, product, onSuccess }: ProductFormProps) {
 
       <div className="flex flex-col gap-2 rounded-lg border p-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="space-y-1">
-          <Label htmlFor="is_featured" className="font-medium">{dict.admin.productFeatured}</Label>
-          <p className="text-sm text-muted-foreground">{dict.admin.productFeaturedDescription}</p>
+          <Label htmlFor="is_featured" className="font-medium">{(dict.admin as any).productFeatured ?? 'Featured Product'}</Label>
+          <p className="text-sm text-muted-foreground">{(dict.admin as any).productFeaturedDescription ?? 'Show this product prominently'}</p>
         </div>
         <div className="flex items-center gap-3">
           <input type="hidden" name="is_featured" value={isFeatured ? 'true' : 'false'} />
@@ -988,20 +989,20 @@ export function ProductForm({ lang, product, onSuccess }: ProductFormProps) {
       <div className="space-y-6 rounded-xl border border-emerald-100 bg-emerald-50/40 p-4 shadow-sm dark:border-emerald-900/50 dark:bg-emerald-950/30">
         <div className="space-y-2">
           <h3 className="font-headline text-lg font-semibold text-emerald-900 dark:text-emerald-100">
-            {dict.admin.productExperienceTitle}
+            {(dict.admin as any).productExperienceTitle ?? 'Product Experience'}
           </h3>
           <p className="text-sm text-muted-foreground dark:text-emerald-200/80">
-            {dict.admin.productExperienceDescription}
+            {(dict.admin as any).productExperienceDescription ?? 'Configure the product experience details'}
           </p>
         </div>
 
         <div className="space-y-4">
           <div className="space-y-1">
             <h4 className="text-sm font-semibold text-emerald-900 dark:text-emerald-100">
-              {dict.admin.productExperienceLocaleHeading}
+              {(dict.admin as any).productExperienceLocaleHeading ?? 'Localized Content'}
             </h4>
             <p className="text-xs text-muted-foreground dark:text-emerald-200/70">
-              {dict.admin.productExperienceLocaleDescription}
+              {(dict.admin as any).productExperienceLocaleDescription ?? 'Configure content for each language'}
             </p>
           </div>
           <Tabs defaultValue={lang} className="w-full">
@@ -1012,7 +1013,7 @@ export function ProductForm({ lang, product, onSuccess }: ProductFormProps) {
                   value={locale}
                   className="rounded-full bg-white px-4 py-1.5 text-sm font-medium text-emerald-700 shadow-sm transition-colors data-[state=active]:bg-emerald-600 data-[state=active]:text-white dark:bg-emerald-900/40 dark:text-emerald-200"
                 >
-                  {locale === 'en' ? dict.admin.languageEnglish : dict.admin.languageSpanish}
+                  {locale === 'en' ? ((dict.admin as any).languageEnglish ?? 'English') : ((dict.admin as any).languageSpanish ?? 'Spanish')}
                 </TabsTrigger>
               ))}
             </TabsList>
@@ -1025,67 +1026,67 @@ export function ProductForm({ lang, product, onSuccess }: ProductFormProps) {
                   className="mt-4 space-y-4 rounded-lg border bg-white/80 p-4 shadow-sm dark:border-emerald-900/50 dark:bg-emerald-950/50"
                 >
                   <div className="space-y-2">
-                    <Label htmlFor={`${locale}-tagline`}>{dict.admin.productExperienceTagline}</Label>
+                    <Label htmlFor={`${locale}-tagline`}>{(dict.admin as any).productExperienceTagline ?? 'Tagline'}</Label>
                     <Input
                       id={`${locale}-tagline`}
                       value={localeState?.tagline ?? ''}
                       onChange={(event) => updateLocaleStringField(locale, 'tagline', event.target.value)}
-                      placeholder={dict.admin.productExperienceTaglinePlaceholder}
+                      placeholder={(dict.admin as any).productExperienceTaglinePlaceholder ?? 'Enter tagline'}
                       disabled={isSubmitting}
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor={`${locale}-hero`}>{dict.admin.productExperienceHeroSupporting}</Label>
+                    <Label htmlFor={`${locale}-hero`}>{(dict.admin as any).productExperienceHeroSupporting ?? 'Hero Supporting Text'}</Label>
                     <Textarea
                       id={`${locale}-hero`}
                       value={localeState?.heroSupporting ?? ''}
                       onChange={(event) => updateLocaleStringField(locale, 'heroSupporting', event.target.value)}
-                      placeholder={dict.admin.productExperienceHeroSupportingPlaceholder}
+                      placeholder={(dict.admin as any).productExperienceHeroSupportingPlaceholder ?? 'Enter hero supporting text'}
                       rows={3}
                       disabled={isSubmitting}
                     />
                   </div>
                   <div className="space-y-4">
                     <div className="space-y-2">
-                      <Label htmlFor={`${locale}-highlights`}>{dict.admin.productExperienceHighlights}</Label>
+                      <Label htmlFor={`${locale}-highlights`}>{(dict.admin as any).productExperienceHighlights ?? 'Quick Highlights'}</Label>
                       <Textarea
                         id={`${locale}-highlights`}
                         value={(localeState?.quickHighlights ?? []).join('\n')}
                         onChange={(event) => updateLocaleListField(locale, 'quickHighlights', event.target.value)}
-                        placeholder={dict.admin.productExperienceHighlightsPlaceholder}
+                        placeholder={(dict.admin as any).productExperienceHighlightsPlaceholder ?? 'Enter highlights'}
                         rows={4}
                         disabled={isSubmitting}
                       />
                       <p className="text-xs text-muted-foreground dark:text-emerald-200/70">
-                        {dict.admin.productExperienceListHelper}
+                        {(dict.admin as any).productExperienceListHelper ?? 'One item per line'}
                       </p>
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor={`${locale}-usage`}>{dict.admin.productExperienceUsage}</Label>
+                      <Label htmlFor={`${locale}-usage`}>{(dict.admin as any).productExperienceUsage ?? 'Usage'}</Label>
                       <Textarea
                         id={`${locale}-usage`}
                         value={(localeState?.usage ?? []).join('\n')}
                         onChange={(event) => updateLocaleListField(locale, 'usage', event.target.value)}
-                        placeholder={dict.admin.productExperienceUsagePlaceholder}
+                        placeholder={(dict.admin as any).productExperienceUsagePlaceholder ?? 'Enter usage instructions'}
                         rows={4}
                         disabled={isSubmitting}
                       />
                       <p className="text-xs text-muted-foreground dark:text-emerald-200/70">
-                        {dict.admin.productExperienceListHelper}
+                        {(dict.admin as any).productExperienceListHelper ?? 'One item per line'}
                       </p>
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor={`${locale}-insights`}>{dict.admin.productExperienceInsights}</Label>
+                      <Label htmlFor={`${locale}-insights`}>{(dict.admin as any).productExperienceInsights ?? 'Insights'}</Label>
                       <Textarea
                         id={`${locale}-insights`}
                         value={(localeState?.insights ?? []).join('\n')}
                         onChange={(event) => updateLocaleListField(locale, 'insights', event.target.value)}
-                        placeholder={dict.admin.productExperienceInsightsPlaceholder}
+                        placeholder={(dict.admin as any).productExperienceInsightsPlaceholder ?? 'Enter insights'}
                         rows={4}
                         disabled={isSubmitting}
                       />
                       <p className="text-xs text-muted-foreground dark:text-emerald-200/70">
-                        {dict.admin.productExperienceListHelper}
+                        {(dict.admin as any).productExperienceListHelper ?? 'One item per line'}
                       </p>
                     </div>
                   </div>
@@ -1099,7 +1100,7 @@ export function ProductForm({ lang, product, onSuccess }: ProductFormProps) {
 
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="space-y-2">
-            <Label htmlFor="experience-rating-average">{dict.admin.productExperienceRatingAverage}</Label>
+            <Label htmlFor="experience-rating-average">{(dict.admin as any).productExperienceRatingAverage ?? 'Average Rating'}</Label>
             <Input
               id="experience-rating-average"
               type="number"
@@ -1112,11 +1113,11 @@ export function ProductForm({ lang, product, onSuccess }: ProductFormProps) {
               disabled={isSubmitting}
             />
             <p className="text-xs text-muted-foreground dark:text-emerald-200/70">
-              {dict.admin.productExperienceRatingHelper}
+              {(dict.admin as any).productExperienceRatingHelper ?? 'Rating from 0 to 5'}
             </p>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="experience-rating-count">{dict.admin.productExperienceRatingCount}</Label>
+            <Label htmlFor="experience-rating-count">{(dict.admin as any).productExperienceRatingCount ?? 'Rating Count'}</Label>
             <Input
               id="experience-rating-count"
               type="number"
@@ -1135,16 +1136,16 @@ export function ProductForm({ lang, product, onSuccess }: ProductFormProps) {
         <div className="space-y-4">
           <div className="space-y-1">
             <h4 className="text-sm font-semibold text-emerald-900 dark:text-emerald-100">
-              {dict.admin.productExperienceReviewsTitle}
+              {(dict.admin as any).productExperienceReviewsTitle ?? 'Reviews'}
             </h4>
             <p className="text-xs text-muted-foreground dark:text-emerald-200/70">
-              {dict.admin.productExperienceReviewsDescription}
+              {(dict.admin as any).productExperienceReviewsDescription ?? 'Manage product reviews'}
             </p>
           </div>
 
           {experienceState.reviews.length === 0 ? (
             <p className="rounded-lg border border-dashed border-emerald-200 bg-white/60 p-4 text-sm text-muted-foreground dark:border-emerald-900/50 dark:bg-emerald-950/40 dark:text-emerald-200/80">
-              {dict.admin.productExperienceReviewEmpty}
+              {(dict.admin as any).productExperienceReviewEmpty ?? 'No reviews yet'}
             </p>
           ) : (
             <div className="space-y-4">
@@ -1157,7 +1158,7 @@ export function ProductForm({ lang, product, onSuccess }: ProductFormProps) {
                     <div className="grid flex-1 gap-4 sm:grid-cols-2">
                       <div className="space-y-2">
                         <Label htmlFor={`review-author-${review.id}`}>
-                          {dict.admin.productExperienceReviewAuthor}
+                          {(dict.admin as any).productExperienceReviewAuthor ?? 'Author'}
                         </Label>
                         <Input
                           id={`review-author-${review.id}`}
@@ -1169,7 +1170,7 @@ export function ProductForm({ lang, product, onSuccess }: ProductFormProps) {
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor={`review-avatar-${review.id}`}>
-                          {dict.admin.productExperienceReviewAvatar}
+                          {(dict.admin as any).productExperienceReviewAvatar ?? 'Avatar URL'}
                         </Label>
                         <Input
                           id={`review-avatar-${review.id}`}
@@ -1179,28 +1180,28 @@ export function ProductForm({ lang, product, onSuccess }: ProductFormProps) {
                           disabled={isSubmitting}
                         />
                         <p className="text-xs text-muted-foreground dark:text-emerald-200/70">
-                          {dict.admin.productExperienceReviewAvatarHint}
+                          {(dict.admin as any).productExperienceReviewAvatarHint ?? 'URL to author avatar image'}
                         </p>
                       </div>
                       <div className="space-y-2">
-                        <Label>{dict.admin.productExperienceReviewLocale}</Label>
+                        <Label>{(dict.admin as any).productExperienceReviewLocale ?? 'Locale'}</Label>
                         <Select
                           value={review.locale}
                           onValueChange={(value) => handleReviewChange(index, 'locale', value as Locale)}
                           disabled={isSubmitting}
                         >
                           <SelectTrigger>
-                            <SelectValue placeholder={dict.admin.productExperienceReviewLocale} />
+                            <SelectValue placeholder={(dict.admin as any).productExperienceReviewLocale ?? 'Select locale'} />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="en">{dict.admin.languageEnglish}</SelectItem>
-                            <SelectItem value="es">{dict.admin.languageSpanish}</SelectItem>
+                            <SelectItem value="en">{(dict.admin as any).languageEnglish ?? 'English'}</SelectItem>
+                            <SelectItem value="es">{(dict.admin as any).languageSpanish ?? 'Spanish'}</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor={`review-rating-${review.id}`}>
-                          {dict.admin.productExperienceReviewRating}
+                          {(dict.admin as any).productExperienceReviewRating ?? 'Rating'}
                         </Label>
                         <Input
                           id={`review-rating-${review.id}`}
@@ -1215,21 +1216,21 @@ export function ProductForm({ lang, product, onSuccess }: ProductFormProps) {
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor={`review-timeago-${review.id}`}>
-                          {dict.admin.productExperienceReviewTimeAgo}
+                          {(dict.admin as any).productExperienceReviewTimeAgo ?? 'Time Ago'}
                         </Label>
                         <Input
                           id={`review-timeago-${review.id}`}
                           value={review.timeAgo}
                           onChange={(event) => handleReviewChange(index, 'timeAgo', event.target.value)}
-                          placeholder={dict.admin.productExperienceReviewTimeAgoPlaceholder}
+                          placeholder={(dict.admin as any).productExperienceReviewTimeAgoPlaceholder ?? 'e.g., 2 weeks ago'}
                           disabled={isSubmitting}
                         />
                         <p className="text-xs text-muted-foreground dark:text-emerald-200/70">
-                          {dict.admin.productExperienceReviewTimeAgoHint}
+                          {(dict.admin as any).productExperienceReviewTimeAgoHint ?? 'How long ago the review was posted'}
                         </p>
                       </div>
                       <div className="space-y-2">
-                        <Label>{dict.admin.productExperienceReviewSource}</Label>
+                        <Label>{(dict.admin as any).productExperienceReviewSource ?? 'Source'}</Label>
                         <Select
                           value={review.source}
                           onValueChange={(value) => handleReviewChange(index, 'source', value as ReviewSource)}
@@ -1239,8 +1240,8 @@ export function ProductForm({ lang, product, onSuccess }: ProductFormProps) {
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="admin">{dict.admin.productExperienceReviewSourceAdmin}</SelectItem>
-                            <SelectItem value="member">{dict.admin.productExperienceReviewSourceMember}</SelectItem>
+                            <SelectItem value="admin">{(dict.admin as any).productExperienceReviewSourceAdmin ?? 'Admin'}</SelectItem>
+                            <SelectItem value="member">{(dict.admin as any).productExperienceReviewSourceMember ?? 'Member'}</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
@@ -1253,12 +1254,12 @@ export function ProductForm({ lang, product, onSuccess }: ProductFormProps) {
                       disabled={isSubmitting}
                     >
                       <Trash2 className="mr-2 h-4 w-4" />
-                      {dict.admin.productExperienceReviewRemove}
+                      {(dict.admin as any).productExperienceReviewRemove ?? 'Remove Review'}
                     </Button>
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor={`review-comment-${review.id}`}>
-                      {dict.admin.productExperienceReviewComment}
+                      {(dict.admin as any).productExperienceReviewComment ?? 'Comment'}
                     </Label>
                     <Textarea
                       id={`review-comment-${review.id}`}
@@ -1281,7 +1282,7 @@ export function ProductForm({ lang, product, onSuccess }: ProductFormProps) {
             disabled={isSubmitting}
           >
             <PlusCircle className="h-4 w-4" />
-            {dict.admin.productExperienceReviewAdd}
+            {(dict.admin as any).productExperienceReviewAdd ?? 'Add Review'}
           </Button>
         </div>
       </div>
@@ -1291,7 +1292,7 @@ export function ProductForm({ lang, product, onSuccess }: ProductFormProps) {
           {dict.admin.cancel}
         </Button>
         <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? 'Guardando...' : dict.admin.saveProduct}
+          {isSubmitting ? 'Guardando...' : ((dict.admin as any).saveProduct ?? 'Save Product')}
         </Button>
       </div>
     </form>

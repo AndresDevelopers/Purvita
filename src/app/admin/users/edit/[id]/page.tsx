@@ -106,13 +106,13 @@ export default async function EditUserPage({ params, searchParams }: { params: P
       <Button variant="ghost" asChild className="mb-4">
         <Link href={`/admin/users?lang=${lang}`}>
           <ChevronLeft className="mr-2 h-4 w-4" />
-          {dict.admin.backToUsers}
+          {(dict.admin as any).backToUsers ?? 'Back to Users'}
         </Link>
       </Button>
       <Card>
         <CardHeader>
-          <CardTitle className="font-headline text-2xl">{dict.admin.editUser}</CardTitle>
-          <CardDescription>{dict.admin.editUserDesc} &quot;{user.name}&quot;</CardDescription>
+          <CardTitle className="font-headline text-2xl">{(dict.admin as any).editUser ?? 'Edit User'}</CardTitle>
+          <CardDescription>{(dict.admin as any).editUserDesc ?? 'Edit user'} &quot;{user.name}&quot;</CardDescription>
           <div className="mt-3 flex items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 p-3 dark:border-slate-700 dark:bg-slate-800">
             <div className="flex-1">
               <p className="text-xs font-medium text-slate-500 dark:text-slate-400">User ID</p>
@@ -126,20 +126,20 @@ export default async function EditUserPage({ params, searchParams }: { params: P
             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div className="space-y-1">
                 <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">
-                  {dict.admin.impersonation.title}
+                  {(dict.admin as any).impersonation.title}
                 </p>
                 <p className="text-sm text-slate-600 dark:text-slate-300">
-                  {dict.admin.impersonation.description}
+                  {(dict.admin as any).impersonation.description}
                 </p>
               </div>
               <ImpersonateUserButton
                 userId={user.id}
                 lang={lang}
                 copy={{
-                  actionLabel: dict.admin.impersonation.actionLabel,
-                  busyLabel: dict.admin.impersonation.busyLabel,
-                  errorTitle: dict.admin.impersonation.errorTitle,
-                  errorDescription: dict.admin.impersonation.errorDescription,
+                  actionLabel: (dict.admin as any).impersonation.actionLabel,
+                  busyLabel: (dict.admin as any).impersonation.busyLabel,
+                  errorTitle: (dict.admin as any).impersonation.errorTitle,
+                  errorDescription: (dict.admin as any).impersonation.errorDescription,
                 }}
                 isUserBlocked={user.status !== 'active' || bundle.isBlacklisted}
                 blockReason={bundle.blacklistReason}

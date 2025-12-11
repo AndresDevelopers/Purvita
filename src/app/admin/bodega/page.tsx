@@ -26,7 +26,7 @@ export default function AdminBodegaPage({ searchParams }: AdminBodegaPageProps) 
 
   return (
     <AdminGuard lang={lang} requiredPermission="manage_products">
-      <WarehouseTrackingController dictionary={copy} lang={lang} />
+      <WarehouseTrackingController dictionary={copy as any} lang={lang} />
     </AdminGuard>
   );
 }

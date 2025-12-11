@@ -26,7 +26,7 @@ const eslintConfig = [
     ],
   },
   // Next.js recommended rules (this should work with the plugin detection)
-  ...compat.extends('next/core-web-vitals'),
+  ...compat.extends('next/core-web-vitals', 'next'),
   // TypeScript support
   {
     files: ['**/*.ts', '**/*.tsx'],

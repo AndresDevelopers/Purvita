@@ -19,13 +19,13 @@ export default async function NewProductPage({ searchParams }: { searchParams: P
       <Button variant="ghost" asChild className="mb-4">
         <Link href={`/admin/products?lang=${lang}`}>
           <ChevronLeft className="mr-2 h-4 w-4" />
-          {dict.admin.backToProducts}
+          {(dict.admin as any).backToProducts ?? 'Back to Products'}
         </Link>
       </Button>
       <Card>
         <CardHeader>
-          <CardTitle className="font-headline text-2xl">{dict.admin.addNewProduct}</CardTitle>
-          <CardDescription>{dict.admin.addNewProductDesc}</CardDescription>
+          <CardTitle className="font-headline text-2xl">{(dict.admin as any).addNewProduct ?? 'Add New Product'}</CardTitle>
+          <CardDescription>{(dict.admin as any).addNewProductDesc ?? 'Create a new product'}</CardDescription>
         </CardHeader>
         <CardContent>
           <ProductForm lang={lang} />

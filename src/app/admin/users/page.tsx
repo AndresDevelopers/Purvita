@@ -73,7 +73,7 @@ async function AdminUsersPageContent({ lang, filters }: { lang: Locale; filters:
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                 <h1 className="text-3xl font-bold font-headline">{dict.admin.users}</h1>
                 <div className="flex items-center gap-2">
-                    <Input className="w-full md:max-w-sm" placeholder={dict.admin.filterUsers} />
+                    <Input className="w-full md:max-w-sm" placeholder={(dict.admin as any).filterUsers ?? 'Filter users'} />
                     <UserFilters
                         levels={levelOptions}
                         subscriptionStatuses={subscriptionStatusOptions}
@@ -83,13 +83,13 @@ async function AdminUsersPageContent({ lang, filters }: { lang: Locale; filters:
             </div>
             <Card>
                 <CardHeader>
-                    <CardTitle>{dict.admin.userManagement}</CardTitle>
-                    <CardDescription>{dict.admin.userManagementDesc}</CardDescription>
+                    <CardTitle>{(dict.admin as any).userManagement ?? 'User Management'}</CardTitle>
+                    <CardDescription>{(dict.admin as any).userManagementDesc ?? 'Manage users'}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
                     {users.length === 0 ? (
                         <div className="rounded-lg border border-dashed px-4 py-10 text-center text-sm text-muted-foreground">
-                            {dict.admin.noUsersFound ?? 'No hay usuarios registrados.'}
+                            {(dict.admin as any).noUsersFound ?? 'No users found'}
                         </div>
                     ) : null}
 
@@ -133,7 +133,7 @@ async function AdminUsersPageContent({ lang, filters }: { lang: Locale; filters:
                                                     </Badge>
                                                 )}
                                                 <span className="rounded-full bg-muted px-2 py-1 text-[11px] text-muted-foreground">
-                                                    {dict.admin.joinDate}: {new Date(user.created_at).toLocaleDateString()}
+                                                    {(dict.admin as any).joinDate ?? 'Join Date'}: {new Date(user.created_at).toLocaleDateString()}
                                                 </span>
                                             </div>
                                             <div className="flex justify-end">
@@ -141,24 +141,24 @@ async function AdminUsersPageContent({ lang, filters }: { lang: Locale; filters:
                                                     <DropdownMenuTrigger asChild>
                                                         <Button variant="outline" size="sm" suppressHydrationWarning>
                                                             <MoreHorizontal className="h-4 w-4" />
-                                                            <span className="sr-only">{dict.admin.actions}</span>
+                                                            <span className="sr-only">{(dict.admin as any).actions ?? 'Actions'}</span>
                                                         </Button>
                                                     </DropdownMenuTrigger>
                                                     <DropdownMenuContent align="end">
                                                         <DropdownMenuItem asChild>
                                                             <Link href={`/admin/users/edit/${user.id}?lang=${lang}`}>
-                                                                {dict.admin.editUser}
+                                                                {(dict.admin as any).editUser ?? 'Edit User'}
                                                             </Link>
                                                         </DropdownMenuItem>
                                                         <DropdownMenuItem asChild>
                                                             <Link href={`/admin/users/details/${user.id}?lang=${lang}`}>
-                                                                {dict.admin.viewDetails}
+                                                                {(dict.admin as any).viewDetails ?? 'View Details'}
                                                             </Link>
                                                         </DropdownMenuItem>
                                                         <DeleteUserButton
                                                             userId={user.id}
-                                                            userName={user.name || user.email || (dict.admin?.common?.user || 'User')}
-                                                            deleteLabel={dict.admin.deleteUser}
+                                                            userName={user.name || user.email || ((dict.admin as any)?.common?.user ?? 'User')}
+                                                            deleteLabel={(dict.admin as any).deleteUser ?? 'Delete User'}
                                                             lang={lang}
                                                         />
                                                     </DropdownMenuContent>
@@ -175,13 +175,13 @@ async function AdminUsersPageContent({ lang, filters }: { lang: Locale; filters:
                         <Table className="min-w-[720px]">
                             <TableHeader>
                                 <TableRow>
-                                    <TableHead>{dict.admin.user}</TableHead>
-                                    <TableHead>{dict.admin.role}</TableHead>
-                                    <TableHead>{dict.admin.status}</TableHead>
+                                    <TableHead>{(dict.admin as any).user ?? 'User'}</TableHead>
+                                    <TableHead>{(dict.admin as any).role ?? 'Role'}</TableHead>
+                                    <TableHead>{(dict.admin as any).status ?? 'Status'}</TableHead>
                                     <TableHead>{dict.admin?.common?.level || 'Level'}</TableHead>
                                     <TableHead>{dict.admin?.common?.subscription || 'Subscription'}</TableHead>
-                                    <TableHead>{dict.admin.joinDate}</TableHead>
-                                    <TableHead className="text-right">{dict.admin.actions}</TableHead>
+                                    <TableHead>{(dict.admin as any).joinDate ?? 'Join Date'}</TableHead>
+                                    <TableHead className="text-right">{(dict.admin as any).actions ?? 'Actions'}</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
@@ -242,15 +242,15 @@ async function AdminUsersPageContent({ lang, filters }: { lang: Locale; filters:
                                                 </DropdownMenuTrigger>
                                                 <DropdownMenuContent align="end">
                                                     <DropdownMenuItem asChild>
-                                                        <Link href={`/admin/users/edit/${user.id}?lang=${lang}`}>{dict.admin.editUser}</Link>
+                                                        <Link href={`/admin/users/edit/${user.id}?lang=${lang}`}>{(dict.admin as any).editUser ?? 'Edit User'}</Link>
                                                     </DropdownMenuItem>
                                                     <DropdownMenuItem asChild>
-                                                        <Link href={`/admin/users/details/${user.id}?lang=${lang}`}>{dict.admin.viewDetails}</Link>
+                                                        <Link href={`/admin/users/details/${user.id}?lang=${lang}`}>{(dict.admin as any).viewDetails ?? 'View Details'}</Link>
                                                     </DropdownMenuItem>
                                                     <DeleteUserButton
                                                         userId={user.id}
-                                                        userName={user.name || user.email || (dict.admin?.common?.user || 'User')}
-                                                        deleteLabel={dict.admin.deleteUser}
+                                                        userName={user.name || user.email || ((dict.admin as any)?.common?.user ?? 'User')}
+                                                        deleteLabel={(dict.admin as any).deleteUser ?? 'Delete User'}
                                                         lang={lang}
                                                     />
                                                 </DropdownMenuContent>
@@ -261,7 +261,7 @@ async function AdminUsersPageContent({ lang, filters }: { lang: Locale; filters:
                                 {users.length === 0 ? (
                                     <TableRow>
                                         <TableCell colSpan={7} className="py-8 text-center text-sm text-muted-foreground">
-                                            {dict.admin.noUsersFound ?? 'No hay usuarios registrados.'}
+                                            {(dict.admin as any).noUsersFound ?? 'No users found'}
                                         </TableCell>
                                     </TableRow>
                                 ) : null}

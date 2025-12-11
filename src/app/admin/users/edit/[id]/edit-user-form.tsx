@@ -288,9 +288,9 @@ export default function EditUserForm({
 
       if (Number.isNaN(parsedWalletAmount) || parsedWalletAmount < 0) {
         toast({
-          title: dict.admin.userUpdateFeedback?.invalidWalletAmountTitle ?? 'Saldo inválido',
+          title: (dict.admin as any).userUpdateFeedback?.invalidWalletAmountTitle ?? 'Saldo inválido',
           description:
-            dict.admin.userUpdateFeedback?.invalidWalletAmountDescription ??
+            (dict.admin as any).userUpdateFeedback?.invalidWalletAmountDescription ??
             'Ingresa un monto válido para el balance del monedero.',
           variant: 'destructive',
         });
@@ -317,9 +317,9 @@ export default function EditUserForm({
 
       if (Number.isNaN(parsedNetworkEarningsAmount) || parsedNetworkEarningsAmount < 0) {
         toast({
-          title: dict.admin.userUpdateFeedback?.invalidNetworkEarningsTitle ?? 'Ganancias inválidas',
+          title: (dict.admin as any).userUpdateFeedback?.invalidNetworkEarningsTitle ?? 'Ganancias inválidas',
           description:
-            dict.admin.userUpdateFeedback?.invalidNetworkEarningsDescription ??
+            (dict.admin as any).userUpdateFeedback?.invalidNetworkEarningsDescription ??
             'Ingresa un monto válido para las ganancias de red.',
           variant: 'destructive',
         });
@@ -349,9 +349,9 @@ export default function EditUserForm({
 
       if (!updates.profile && !updates.subscription && !updates.wallet && !updates.networkEarnings && !updates.phase) {
         toast({
-          title: dict.admin.userUpdateFeedback?.noChangesTitle ?? 'Sin cambios detectados',
+          title: (dict.admin as any).userUpdateFeedback?.noChangesTitle ?? 'Sin cambios detectados',
           description:
-            dict.admin.userUpdateFeedback?.noChangesDescription ??
+            (dict.admin as any).userUpdateFeedback?.noChangesDescription ??
             'Actualiza al menos un campo antes de guardar.',
         });
         setLoading(false);
@@ -366,9 +366,9 @@ export default function EditUserForm({
       }
 
       toast({
-        title: dict.admin.userUpdateFeedback?.successTitle ?? 'Usuario actualizado',
+        title: (dict.admin as any).userUpdateFeedback?.successTitle ?? 'Usuario actualizado',
         description:
-          dict.admin.userUpdateFeedback?.successDescription ??
+          (dict.admin as any).userUpdateFeedback?.successDescription ??
           'Los datos del usuario se guardaron correctamente. El usuario verá los cambios al refrescar su página.',
       });
 
@@ -376,11 +376,11 @@ export default function EditUserForm({
       router.refresh();
     } catch (error) {
       toast({
-        title: dict.admin.userUpdateFeedback?.errorTitle ?? 'Error al actualizar',
+        title: (dict.admin as any).userUpdateFeedback?.errorTitle ?? 'Error al actualizar',
         description:
           error instanceof Error
             ? error.message
-            : dict.admin.userUpdateFeedback?.errorDescription ??
+            : (dict.admin as any).userUpdateFeedback?.errorDescription ??
             'No se pudo actualizar el usuario. Inténtalo nuevamente.',
         variant: 'destructive',
       });
@@ -389,10 +389,10 @@ export default function EditUserForm({
     }
   };
 
-  const _subscriptionSection = dict.admin.subscriptionSettings ?? {};
-  const walletSection = dict.admin.walletSettings ?? {};
-  const networkEarningsSection = dict.admin.networkEarningsSettings ?? {};
-  const referralSection = dict.admin.referralSettings ?? {};
+  const _subscriptionSection = (dict.admin as any).subscriptionSettings ?? {};
+  const walletSection = (dict.admin as any).walletSettings ?? {};
+  const networkEarningsSection = (dict.admin as any).networkEarningsSettings ?? {};
+  const referralSection = (dict.admin as any).referralSettings ?? {};
 
   return (
     <form onSubmit={handleSubmit} className="grid gap-6">
@@ -442,10 +442,10 @@ export default function EditUserForm({
           </p>
         </div>
         <div className="space-y-2">
-          <Label htmlFor="status">{dict.admin.status}</Label>
+          <Label htmlFor="status">{(dict.admin as any).status ?? 'Status'}</Label>
           <Select value={formData.status} onValueChange={(value) => handleInputChange('status', value)}>
             <SelectTrigger id="status">
-              <SelectValue placeholder={dict.admin.selectStatus} />
+              <SelectValue placeholder={(dict.admin as any).selectStatus ?? 'Select status'} />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="active">{dict.team.statusActive}</SelectItem>
@@ -869,7 +869,7 @@ export default function EditUserForm({
         userPhase={userPhase}
         setUserPhase={setUserPhase}
         userId={user.id}
-        dict={dict.admin.phaseRewardsSettings ?? {}}
+        dict={(dict.admin as any).phaseRewardsSettings ?? {}}
       />
 
       <div className="flex justify-end gap-2">

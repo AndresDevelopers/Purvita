@@ -73,7 +73,7 @@ function EditProductPageContent() {
         <Button variant="ghost" asChild className="mb-4">
           <Link href={`/admin/products?lang=${lang}`}>
             <ChevronLeft className="mr-2 h-4 w-4" />
-            {dict.admin.backToProducts}
+            {(dict.admin as any).backToProducts ?? 'Back to Products'}
           </Link>
         </Button>
         <Card>
@@ -91,7 +91,7 @@ function EditProductPageContent() {
         <Button variant="ghost" asChild className="mb-4">
           <Link href={`/admin/products?lang=${lang}`}>
             <ChevronLeft className="mr-2 h-4 w-4" />
-            {dict.admin.backToProducts}
+            {(dict.admin as any).backToProducts ?? 'Back to Products'}
           </Link>
         </Button>
         <Card>
@@ -108,13 +108,13 @@ function EditProductPageContent() {
       <Button variant="ghost" asChild className="mb-4">
         <Link href={`/admin/products?lang=${lang}`}>
           <ChevronLeft className="mr-2 h-4 w-4" />
-          {dict.admin.backToProducts}
+          {(dict.admin as any).backToProducts ?? 'Back to Products'}
         </Link>
       </Button>
       <Card>
         <CardHeader>
           <CardTitle className="font-headline text-2xl">{dict.admin.editProduct}</CardTitle>
-          <CardDescription>{dict.admin.editProductDesc}</CardDescription>
+          <CardDescription>{(dict.admin as any).editProductDesc ?? 'Edit product'}</CardDescription>
         </CardHeader>
         <CardContent>
           <ProductForm lang={lang} product={product} />

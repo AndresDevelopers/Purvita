@@ -408,7 +408,7 @@ export default function DashboardContent({ lang, dict }: DashboardContentProps) 
   const statusLabel = summaryDict.cards.subscription[statusKey];
 
   return (
-    <UserProfileProvider initialProfile={userProfile} autoLoad={false}>
+    <UserProfileProvider initialProfile={userProfile as any} autoLoad={false}>
       <div className="min-h-screen bg-[#f6f8f6] text-slate-900 dark:bg-[#0b1910] dark:text-slate-100" data-lang={lang}>
       <main className="px-4 py-10 sm:px-6 lg:px-12">
         <div className="mx-auto w-full max-w-6xl space-y-10">
@@ -845,8 +845,8 @@ function NetworkLevelCard({ snapshot, dict, formatter }: NetworkLevelCardProps) 
       </div>
       <div className="mt-3 h-2 rounded-full bg-slate-200 dark:bg-white/10">
         <div
-          className="h-2 rounded-full bg-emerald-500 transition-all duration-500 ease-out dark:bg-emerald-300"
-          style={{ width: `${progress}%` }}
+          className={`h-2 rounded-full bg-emerald-500 transition-all duration-500 ease-out dark:bg-emerald-300 progress-bar`}
+          data-progress={progress}
         />
       </div>
       <dl className="mt-4 grid grid-cols-3 gap-3 text-xs text-slate-600 dark:text-slate-300">

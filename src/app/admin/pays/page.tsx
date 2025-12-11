@@ -48,9 +48,9 @@ export default async function AdminPaysPage({
       successDescription: dict.admin.paymentGateways.paypal?.successDescription ?? 'Configuración de PayPal actualizada',
     },
     stripe: {
-      title: dict.admin.paymentGateways.stripe?.title ?? 'Stripe',
-      description: dict.admin.paymentGateways.stripe?.description ?? 'Configurar Stripe para pagos y cobros',
-      successDescription: dict.admin.paymentGateways.stripe?.successDescription ?? 'Configuración de Stripe actualizada',
+      title: (dict.admin.paymentGateways as any).stripe?.title ?? 'Stripe',
+      description: (dict.admin.paymentGateways as any).stripe?.description ?? 'Configurar Stripe para pagos y cobros',
+      successDescription: (dict.admin.paymentGateways as any).stripe?.successDescription ?? 'Configuración de Stripe actualizada',
     },
     wallet: {
       title: (dict.admin.paymentGateways as any).wallet?.title ?? 'Billetera Interna',

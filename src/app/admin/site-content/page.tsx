@@ -645,7 +645,7 @@ export default function AdminSiteContentPage({
     [lang, globalBranding.appName],
   );
   const copy = dict.admin?.siteContent;
-  const footerBrandingCopy = (copy?.footer as { branding?: FooterBrandingCopy } | undefined)?.branding;
+  const footerBrandingCopy = ((copy as any)?.footer as { branding?: FooterBrandingCopy } | undefined)?.branding;
   const { toast } = useToast();
 
   const [selectedLocale, setSelectedLocale] = useState<Locale>(initialLocale);
@@ -2206,9 +2206,9 @@ export default function AdminSiteContentPage({
             </Card>
             <Card>
               <CardHeader>
-                <CardTitle>{copy?.header?.title ?? 'Navegación y acciones del header'}</CardTitle>
+                <CardTitle>{(copy as any)?.header?.title ?? 'Navegación y acciones del header'}</CardTitle>
                 <CardDescription>
-                  {copy?.header?.description ??
+                  {(copy as any)?.header?.description ??
                     'Administra los enlaces públicos, las opciones autenticadas y los llamados a la acción que aparecen en el encabezado.'}
                 </CardDescription>
               </CardHeader>
@@ -2216,10 +2216,10 @@ export default function AdminSiteContentPage({
                 <section className="space-y-4">
                   <div>
                     <h3 className="text-base font-semibold">
-                      {copy?.header?.actions?.title ?? 'Botones de acción'}
+                      {(copy as any)?.header?.actions?.title ?? 'Botones de acción'}
                     </h3>
                     <p className="text-sm text-muted-foreground">
-                      {copy?.header?.actions?.description ?? 'Define las acciones principales que aparecerán en el encabezado.'}
+                      {(copy as any)?.header?.actions?.description ?? 'Define las acciones principales que aparecerán en el encabezado.'}
                     </p>
                   </div>
                   <div className="grid gap-4 md:grid-cols-2">
@@ -2228,28 +2228,28 @@ export default function AdminSiteContentPage({
                     ) : (
                       <>
                         <Input
-                          placeholder={copy?.header?.actions?.primaryLabel ?? 'Etiqueta de la acción principal'}
+                          placeholder={(copy as any)?.header?.actions?.primaryLabel ?? 'Etiqueta de la acción principal'}
                           value={landingForm?.header.primaryAction.label ?? ''}
                           onChange={(event) => handleHeaderActionChange('primaryAction', 'label', event.target.value)}
                           required
                           minLength={1}
                         />
                         <Input
-                          placeholder={copy?.header?.actions?.primaryHref ?? 'Enlace de la acción principal'}
+                          placeholder={(copy as any)?.header?.actions?.primaryHref ?? 'Enlace de la acción principal'}
                           value={landingForm?.header.primaryAction.href ?? ''}
                           onChange={(event) => handleHeaderActionChange('primaryAction', 'href', event.target.value)}
                           required
                           minLength={1}
                         />
                         <Input
-                          placeholder={copy?.header?.actions?.secondaryLabel ?? 'Etiqueta de la acción secundaria'}
+                          placeholder={(copy as any)?.header?.actions?.secondaryLabel ?? 'Etiqueta de la acción secundaria'}
                           value={landingForm?.header.secondaryAction.label ?? ''}
                           onChange={(event) => handleHeaderActionChange('secondaryAction', 'label', event.target.value)}
                           required
                           minLength={1}
                         />
                         <Input
-                          placeholder={copy?.header?.actions?.secondaryHref ?? 'Enlace de la acción secundaria'}
+                          placeholder={(copy as any)?.header?.actions?.secondaryHref ?? 'Enlace de la acción secundaria'}
                           value={landingForm?.header.secondaryAction.href ?? ''}
                           onChange={(event) => handleHeaderActionChange('secondaryAction', 'href', event.target.value)}
                           required
@@ -2261,10 +2261,10 @@ export default function AdminSiteContentPage({
                   <div className="flex items-center justify-between rounded-md border border-border bg-muted/40 p-4">
                     <div className="space-y-1">
                       <p className="text-sm font-medium">
-                        {copy?.header?.actions?.showCart ?? 'Mostrar acceso directo al carrito al autenticarse'}
+                        {(copy as any)?.header?.actions?.showCart ?? 'Mostrar acceso directo al carrito al autenticarse'}
                       </p>
                       <p className="text-xs text-muted-foreground">
-                        {copy?.header?.actions?.showCartDescription ?? 'Permite que los usuarios accedan al carrito con un solo clic después de iniciar sesión.'}
+                        {(copy as any)?.header?.actions?.showCartDescription ?? 'Permite que los usuarios accedan al carrito con un solo clic después de iniciar sesión.'}
                       </p>
                     </div>
                     {loading ? (
@@ -2281,15 +2281,15 @@ export default function AdminSiteContentPage({
                   <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                     <div>
                       <h3 className="text-base font-semibold">
-                        {copy?.header?.landingLinks?.title ?? 'Navegación de la landing'}
+                        {(copy as any)?.header?.landingLinks?.title ?? 'Navegación de la landing'}
                       </h3>
                       <p className="text-sm text-muted-foreground">
-                        {copy?.header?.landingLinks?.description ?? 'Enlaces visibles en la página pública.'}
+                        {(copy as any)?.header?.landingLinks?.description ?? 'Enlaces visibles en la página pública.'}
                       </p>
                     </div>
                     <Button type="button" variant="outline" onClick={() => addHeaderLink('landingLinks')} disabled={loading}>
                       <PlusCircle className="mr-2 h-4 w-4" />
-                      {copy?.header?.landingLinks?.add ?? 'Agregar enlace'}
+                      {(copy as any)?.header?.landingLinks?.add ?? 'Agregar enlace'}
                     </Button>
                   </div>
                   <div className="space-y-4">
@@ -2300,23 +2300,23 @@ export default function AdminSiteContentPage({
                         <Card key={link.id ?? index} className="border-muted/30 bg-muted/20">
                           <CardHeader className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
                             <CardTitle className="text-base font-semibold">
-                              {(copy?.header?.landingLinks?.label ?? 'Enlace {{index}}').replace('{{index}}', String(index + 1))}
+                              {((copy as any)?.header?.landingLinks?.label ?? 'Enlace {{index}}').replace('{{index}}', String(index + 1))}
                             </CardTitle>
                             <Button type="button" variant="ghost" size="sm" onClick={() => removeHeaderLink('landingLinks', index)} disabled={landingForm.header.landingLinks.length <= 1}>
                               <Trash2 className="mr-2 h-4 w-4" />
-                              {copy?.header?.landingLinks?.remove ?? 'Eliminar'}
+                              {(copy as any)?.header?.landingLinks?.remove ?? 'Eliminar'}
                             </Button>
                           </CardHeader>
                           <CardContent className="space-y-3">
                             <Input
-                              placeholder={copy?.header?.landingLinks?.label ?? 'Etiqueta'}
+                              placeholder={(copy as any)?.header?.landingLinks?.label ?? 'Etiqueta'}
                               value={link.label}
                               onChange={(event) => handleHeaderLinkFieldChange('landingLinks', index, 'label', event.target.value)}
                               required
                               minLength={1}
                             />
                             <Input
-                              placeholder={copy?.header?.landingLinks?.href ?? 'URL o ancla'}
+                              placeholder={(copy as any)?.header?.landingLinks?.href ?? 'URL o ancla'}
                               value={link.href}
                               onChange={(event) => handleHeaderLinkFieldChange('landingLinks', index, 'href', event.target.value)}
                               required
@@ -2347,15 +2347,15 @@ export default function AdminSiteContentPage({
                   <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                     <div>
                       <h3 className="text-base font-semibold">
-                        {copy?.header?.authenticatedLinks?.title ?? 'Navegación autenticada'}
+                        {(copy as any)?.header?.authenticatedLinks?.title ?? 'Navegación autenticada'}
                       </h3>
                       <p className="text-sm text-muted-foreground">
-                        {copy?.header?.authenticatedLinks?.description ?? 'Enlaces disponibles después de iniciar sesión.'}
+                        {(copy as any)?.header?.authenticatedLinks?.description ?? 'Enlaces disponibles después de iniciar sesión.'}
                       </p>
                     </div>
                     <Button type="button" variant="outline" onClick={() => addHeaderLink('authenticatedLinks')} disabled={loading}>
                       <PlusCircle className="mr-2 h-4 w-4" />
-                      {copy?.header?.authenticatedLinks?.add ?? 'Agregar enlace'}
+                      {(copy as any)?.header?.authenticatedLinks?.add ?? 'Agregar enlace'}
                     </Button>
                   </div>
                   <div className="space-y-4">
@@ -2366,23 +2366,23 @@ export default function AdminSiteContentPage({
                         <Card key={link.id ?? index} className="border-muted/30 bg-muted/20">
                           <CardHeader className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
                             <CardTitle className="text-base font-semibold">
-                              {(copy?.header?.authenticatedLinks?.label ?? 'Enlace {{index}}').replace('{{index}}', String(index + 1))}
+                              {((copy as any)?.header?.authenticatedLinks?.label ?? 'Enlace {{index}}').replace('{{index}}', String(index + 1))}
                             </CardTitle>
                             <Button type="button" variant="ghost" size="sm" onClick={() => removeHeaderLink('authenticatedLinks', index)} disabled={landingForm.header.authenticatedLinks.length <= 1}>
                               <Trash2 className="mr-2 h-4 w-4" />
-                              {copy?.header?.authenticatedLinks?.remove ?? 'Eliminar'}
+                              {(copy as any)?.header?.authenticatedLinks?.remove ?? 'Eliminar'}
                             </Button>
                           </CardHeader>
                           <CardContent className="space-y-3">
                             <Input
-                              placeholder={copy?.header?.landingLinks?.label ?? 'Etiqueta'}
+                              placeholder={(copy as any)?.header?.landingLinks?.label ?? 'Etiqueta'}
                               value={link.label}
                               onChange={(event) => handleHeaderLinkFieldChange('authenticatedLinks', index, 'label', event.target.value)}
                               required
                               minLength={1}
                             />
                             <Input
-                              placeholder={copy?.header?.landingLinks?.href ?? 'URL o ancla'}
+                              placeholder={(copy as any)?.header?.landingLinks?.href ?? 'URL o ancla'}
                               value={link.href}
                               onChange={(event) => handleHeaderLinkFieldChange('authenticatedLinks', index, 'href', event.target.value)}
                               required
@@ -2617,9 +2617,9 @@ export default function AdminSiteContentPage({
 
                 <section className="space-y-4">
                   <div>
-                    <h2 className="text-lg font-semibold">{copy?.opportunity?.title ?? 'Oportunidad de negocio'}</h2>
+                    <h2 className="text-lg font-semibold">{(copy as any)?.opportunity?.title ?? 'Oportunidad de negocio'}</h2>
                     <p className="text-sm text-muted-foreground">
-                      {copy?.opportunity?.description ??
+                      {(copy as any)?.opportunity?.description ??
                         'Configura los textos generales de la sección de oportunidad. Las fases se gestionan desde Configuración de la Aplicación.'}
                     </p>
                   </div>
@@ -2629,7 +2629,7 @@ export default function AdminSiteContentPage({
                       <Skeleton className="h-10 w-full" />
                     ) : (
                       <Input
-                        placeholder={copy?.opportunity?.fields?.title ?? 'Título de la sección'}
+                        placeholder={(copy as any)?.opportunity?.fields?.title ?? 'Título de la sección'}
                         value={landingForm?.opportunity.title ?? ''}
                         onChange={(event) => handleOpportunityFieldChange('title', event.target.value)}
                         required
@@ -2640,7 +2640,7 @@ export default function AdminSiteContentPage({
                       <Skeleton className="h-10 w-full" />
                     ) : (
                       <Input
-                        placeholder={copy?.opportunity?.fields?.duplicationNote ?? 'Nota de duplicación'}
+                        placeholder={(copy as any)?.opportunity?.fields?.duplicationNote ?? 'Nota de duplicación'}
                         value={landingForm?.opportunity.duplicationNote ?? ''}
                         onChange={(event) => handleOpportunityFieldChange('duplicationNote', event.target.value)}
                         required
@@ -2652,7 +2652,7 @@ export default function AdminSiteContentPage({
                     ) : (
                       <Textarea
                         rows={3}
-                        placeholder={copy?.opportunity?.fields?.subtitle ?? 'Subtítulo de la sección'}
+                        placeholder={(copy as any)?.opportunity?.fields?.subtitle ?? 'Subtítulo de la sección'}
                         value={landingForm?.opportunity.subtitle ?? ''}
                         onChange={(event) => handleOpportunityFieldChange('subtitle', event.target.value)}
                         required
@@ -2664,7 +2664,7 @@ export default function AdminSiteContentPage({
                       <Skeleton className="h-10 w-full" />
                     ) : (
                       <Input
-                        placeholder={copy?.opportunity?.fields?.networkCap ?? 'Capacidad visible de red'}
+                        placeholder={(copy as any)?.opportunity?.fields?.networkCap ?? 'Capacidad visible de red'}
                         value={landingForm?.opportunity.networkCap ?? ''}
                         onChange={(event) => handleOpportunityFieldChange('networkCap', event.target.value)}
                         required
@@ -2676,7 +2676,7 @@ export default function AdminSiteContentPage({
                       <Skeleton className="h-10 w-full" />
                     ) : (
                       <Input
-                        placeholder={copy?.opportunity?.fields?.summaryTitle ?? 'Título de resumen (opcional)'}
+                        placeholder={(copy as any)?.opportunity?.fields?.summaryTitle ?? 'Título de resumen (opcional)'}
                         value={landingForm?.opportunity.summary?.title ?? ''}
                         onChange={(event) => handleOpportunitySummaryChange('title', event.target.value)}
                       />
@@ -2685,7 +2685,7 @@ export default function AdminSiteContentPage({
                       <Skeleton className="h-10 w-full" />
                     ) : (
                       <Input
-                        placeholder={copy?.opportunity?.fields?.summaryDescription ?? 'Descripción de resumen (opcional)'}
+                        placeholder={(copy as any)?.opportunity?.fields?.summaryDescription ?? 'Descripción de resumen (opcional)'}
                         value={landingForm?.opportunity.summary?.description ?? ''}
                         onChange={(event) => handleOpportunitySummaryChange('description', event.target.value)}
                       />
@@ -2825,7 +2825,7 @@ export default function AdminSiteContentPage({
                 {/* Team Section - Featured Member Selection */}
                 <section className="space-y-4">
                   <div>
-                    <h2 className="text-lg font-semibold">{copy?.team?.title ?? 'Equipo Destacado'}</h2>
+                    <h2 className="text-lg font-semibold">{(copy as any)?.team?.title ?? 'Equipo Destacado'}</h2>
                     <p className="text-sm text-muted-foreground">
                       Selecciona hasta 4 miembros del equipo para mostrar en la landing page. Los miembros se gestionan desde la pestaña &quot;Team&quot; en el panel de Páginas.
                     </p>
@@ -3420,16 +3420,16 @@ export default function AdminSiteContentPage({
           <TabsContent value="footer" className="space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle>{copy?.footer?.title ?? 'Contenido del footer'}</CardTitle>
+                <CardTitle>{(copy as any)?.footer?.title ?? 'Contenido del footer'}</CardTitle>
                 <CardDescription>
-                  {copy?.footer?.description ??
+                  {(copy as any)?.footer?.description ??
                     'Configura el eslogan, los enlaces y los perfiles sociales visibles al final de cada página.'}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <section className="space-y-4">
                   <div className="space-y-2">
-                    <Label>{copy?.footer?.taglineLabel ?? 'Eslogan'}</Label>
+                    <Label>{(copy as any)?.footer?.taglineLabel ?? 'Eslogan'}</Label>
                     {loading ? (
                       <Skeleton className="h-10 w-full" />
                     ) : (
@@ -3558,12 +3558,12 @@ export default function AdminSiteContentPage({
                 <section className="space-y-4">
                   <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                     <div>
-                      <h3 className="text-base font-semibold">{copy?.footer?.navigation?.title ?? 'Enlaces de navegación'}</h3>
-                      <p className="text-sm text-muted-foreground">{copy?.footer?.navigation?.description ?? 'Resalta las secciones más importantes.'}</p>
+                      <h3 className="text-base font-semibold">{(copy as any)?.footer?.navigation?.title ?? 'Enlaces de navegación'}</h3>
+                      <p className="text-sm text-muted-foreground">{(copy as any)?.footer?.navigation?.description ?? 'Resalta las secciones más importantes.'}</p>
                     </div>
                     <Button type="button" variant="outline" onClick={() => addFooterLink('navigationLinks')} disabled={loading}>
                       <PlusCircle className="mr-2 h-4 w-4" />
-                      {copy?.footer?.navigation?.add ?? 'Agregar enlace'}
+                      {(copy as any)?.footer?.navigation?.add ?? 'Agregar enlace'}
                     </Button>
                   </div>
                   <div className="space-y-4">
@@ -3573,22 +3573,22 @@ export default function AdminSiteContentPage({
                       landingForm.footer.navigationLinks.map((link, index) => (
                         <Card key={link.id ?? index} className="border-muted/30 bg-muted/20">
                           <CardHeader className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-                            <CardTitle className="text-base font-semibold">{(copy?.footer?.navigation?.label ?? 'Enlace {{index}}').replace('{{index}}', String(index + 1))}</CardTitle>
+                            <CardTitle className="text-base font-semibold">{((copy as any)?.footer?.navigation?.label ?? 'Enlace {{index}}').replace('{{index}}', String(index + 1))}</CardTitle>
                             <Button type="button" variant="ghost" size="sm" onClick={() => removeFooterLink('navigationLinks', index)} disabled={landingForm.footer.navigationLinks.length <= 1}>
                               <Trash2 className="mr-2 h-4 w-4" />
-                              {copy?.footer?.navigation?.remove ?? 'Eliminar'}
+                              {(copy as any)?.footer?.navigation?.remove ?? 'Eliminar'}
                             </Button>
                           </CardHeader>
                           <CardContent className="space-y-3">
                             <Input
-                              placeholder={copy?.footer?.navigation?.label ?? 'Etiqueta'}
+                              placeholder={(copy as any)?.footer?.navigation?.label ?? 'Etiqueta'}
                               value={link.label}
                               onChange={(event) => handleFooterLinkFieldChange('navigationLinks', index, 'label', event.target.value)}
                               required
                               minLength={1}
                             />
                             <Input
-                              placeholder={copy?.footer?.navigation?.href ?? 'URL o ancla'}
+                              placeholder={(copy as any)?.footer?.navigation?.href ?? 'URL o ancla'}
                               value={link.href}
                               onChange={(event) => handleFooterLinkFieldChange('navigationLinks', index, 'href', event.target.value)}
                               required
@@ -3618,12 +3618,12 @@ export default function AdminSiteContentPage({
                 <section className="space-y-4">
                   <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                     <div>
-                      <h3 className="text-base font-semibold">{copy?.footer?.legal?.title ?? 'Enlaces legales'}</h3>
-                      <p className="text-sm text-muted-foreground">{copy?.footer?.legal?.description ?? 'Incluye tus políticas más importantes.'}</p>
+                      <h3 className="text-base font-semibold">{(copy as any)?.footer?.legal?.title ?? 'Enlaces legales'}</h3>
+                      <p className="text-sm text-muted-foreground">{(copy as any)?.footer?.legal?.description ?? 'Incluye tus políticas más importantes.'}</p>
                     </div>
                     <Button type="button" variant="outline" onClick={() => addFooterLink('legalLinks')} disabled={loading}>
                       <PlusCircle className="mr-2 h-4 w-4" />
-                      {copy?.footer?.legal?.add ?? 'Agregar enlace'}
+                      {(copy as any)?.footer?.legal?.add ?? 'Agregar enlace'}
                     </Button>
                   </div>
                   <div className="space-y-4">
@@ -3633,22 +3633,22 @@ export default function AdminSiteContentPage({
                       landingForm.footer.legalLinks.map((link, index) => (
                         <Card key={link.id ?? index} className="border-muted/30 bg-muted/20">
                           <CardHeader className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-                            <CardTitle className="text-base font-semibold">{(copy?.footer?.legal?.label ?? 'Enlace {{index}}').replace('{{index}}', String(index + 1))}</CardTitle>
+                            <CardTitle className="text-base font-semibold">{((copy as any)?.footer?.legal?.label ?? 'Enlace {{index}}').replace('{{index}}', String(index + 1))}</CardTitle>
                             <Button type="button" variant="ghost" size="sm" onClick={() => removeFooterLink('legalLinks', index)} disabled={landingForm.footer.legalLinks.length <= 1}>
                               <Trash2 className="mr-2 h-4 w-4" />
-                              {copy?.footer?.legal?.remove ?? 'Eliminar'}
+                              {(copy as any)?.footer?.legal?.remove ?? 'Eliminar'}
                             </Button>
                           </CardHeader>
                           <CardContent className="space-y-3">
                             <Input
-                              placeholder={copy?.footer?.legal?.label ?? 'Etiqueta'}
+                              placeholder={(copy as any)?.footer?.legal?.label ?? 'Etiqueta'}
                               value={link.label}
                               onChange={(event) => handleFooterLinkFieldChange('legalLinks', index, 'label', event.target.value)}
                               required
                               minLength={1}
                             />
                             <Input
-                              placeholder={copy?.footer?.legal?.href ?? 'URL'}
+                              placeholder={(copy as any)?.footer?.legal?.href ?? 'URL'}
                               value={link.href}
                               onChange={(event) => handleFooterLinkFieldChange('legalLinks', index, 'href', event.target.value)}
                               required
@@ -3678,27 +3678,27 @@ export default function AdminSiteContentPage({
                 <section className="space-y-4">
                   <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                     <div>
-                      <h3 className="text-base font-semibold">{copy?.footer?.social?.title ?? 'Perfiles sociales'}</h3>
-                      <p className="text-sm text-muted-foreground">{copy?.footer?.social?.description ?? 'Comparte los perfiles en los que la comunidad puede seguirte.'}</p>
+                      <h3 className="text-base font-semibold">{(copy as any)?.footer?.social?.title ?? 'Perfiles sociales'}</h3>
+                      <p className="text-sm text-muted-foreground">{(copy as any)?.footer?.social?.description ?? 'Comparte los perfiles en los que la comunidad puede seguirte.'}</p>
                     </div>
                     <Button type="button" variant="outline" onClick={addFooterSocial} disabled={loading}>
                       <PlusCircle className="mr-2 h-4 w-4" />
-                      {copy?.footer?.social?.add ?? 'Agregar perfil'}
+                      {(copy as any)?.footer?.social?.add ?? 'Agregar perfil'}
                     </Button>
                   </div>
                   <div className="space-y-4">
                     {loading || !landingForm ? (
                       <Skeleton className="h-24 w-full" />
                     ) : landingForm.footer.socialLinks.length === 0 ? (
-                      <p className="text-sm text-muted-foreground">{copy?.footer?.social?.empty ?? 'Añade al menos un perfil social.'}</p>
+                      <p className="text-sm text-muted-foreground">{(copy as any)?.footer?.social?.empty ?? 'Añade al menos un perfil social.'}</p>
                     ) : (
                       landingForm.footer.socialLinks.map((link, index) => (
                         <Card key={link.id ?? index} className="border-muted/30 bg-muted/20">
                           <CardHeader className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-                            <CardTitle className="text-base font-semibold">{(copy?.footer?.social?.label ?? 'Perfil {{index}}').replace('{{index}}', String(index + 1))}</CardTitle>
+                            <CardTitle className="text-base font-semibold">{((copy as any)?.footer?.social?.label ?? 'Perfil {{index}}').replace('{{index}}', String(index + 1))}</CardTitle>
                             <Button type="button" variant="ghost" size="sm" onClick={() => removeFooterSocial(index)}>
                               <Trash2 className="mr-2 h-4 w-4" />
-                              {copy?.footer?.social?.remove ?? 'Eliminar'}
+                              {(copy as any)?.footer?.social?.remove ?? 'Eliminar'}
                             </Button>
                           </CardHeader>
                           <CardContent className="grid gap-3 md:grid-cols-2">
@@ -3720,14 +3720,14 @@ export default function AdminSiteContentPage({
                               </SelectContent>
                             </Select>
                             <Input
-                              placeholder={copy?.footer?.social?.label ?? 'Etiqueta accesible'}
+                              placeholder={(copy as any)?.footer?.social?.label ?? 'Etiqueta accesible'}
                               value={link.label}
                               onChange={(event) => handleFooterSocialFieldChange(index, 'label', event.target.value)}
                               required
                               minLength={1}
                             />
                             <Input
-                              placeholder={copy?.footer?.social?.href ?? 'URL del perfil'}
+                              placeholder={(copy as any)?.footer?.social?.href ?? 'URL del perfil'}
                               value={link.href}
                               onChange={(event) => handleFooterSocialFieldChange(index, 'href', event.target.value)}
                               required
@@ -3745,7 +3745,7 @@ export default function AdminSiteContentPage({
 
                 <section className="grid gap-4 md:grid-cols-2">
                   <div className="flex items-center justify-between rounded-md border border-border bg-muted/40 p-3">
-                    <span className="text-sm font-medium">{copy?.footer?.toggles?.language ?? 'Mostrar selector de idioma'}</span>
+                    <span className="text-sm font-medium">{(copy as any)?.footer?.toggles?.language ?? 'Mostrar selector de idioma'}</span>
                     {loading ? (
                       <Skeleton className="h-6 w-11 rounded-full" />
                     ) : (
@@ -3756,7 +3756,7 @@ export default function AdminSiteContentPage({
                     )}
                   </div>
                   <div className="flex items-center justify-between rounded-md border border-border bg-muted/40 p-3">
-                    <span className="text-sm font-medium">{copy?.footer?.toggles?.theme ?? 'Mostrar selector de tema'}</span>
+                    <span className="text-sm font-medium">{(copy as any)?.footer?.toggles?.theme ?? 'Mostrar selector de tema'}</span>
                     {loading ? (
                       <Skeleton className="h-6 w-11 rounded-full" />
                     ) : (
@@ -4185,7 +4185,7 @@ export default function AdminSiteContentPage({
         </Tabs>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-sm text-muted-foreground">
-            {copy?.footerNote ??
+            {(copy as any)?.footerNote ??
               'Los cambios son visibles inmediatamente en la landing page y en toda la aplicación.'}
           </p>
           <Button type="submit" disabled={saving || loading} className="min-w-[180px]">

@@ -125,6 +125,7 @@ const mapHeaderLink = (link: LandingHeaderLink, index: number): LandingHeaderLin
   label: link.label,
   href: link.href,
   requiresAuth: link.requiresAuth ?? false,
+  openInNewTab: link.openInNewTab ?? false,
   order: index,
 });
 
@@ -132,6 +133,7 @@ const mapFooterLink = (link: LandingFooterLink, index: number): LandingFooterLin
   id: link.id,
   label: link.label,
   href: link.href,
+  openInNewTab: link.openInNewTab ?? false,
   order: index,
 });
 
@@ -364,6 +366,7 @@ const createEmptyLandingFormState = (): LandingFormState => ({
         label: '',
         href: '#',
         requiresAuth: false,
+        openInNewTab: false,
         order: 0,
       },
     ],
@@ -373,6 +376,7 @@ const createEmptyLandingFormState = (): LandingFormState => ({
         label: '',
         href: '/',
         requiresAuth: true,
+        openInNewTab: false,
         order: 0,
       },
     ],
@@ -393,6 +397,7 @@ const createEmptyLandingFormState = (): LandingFormState => ({
         id: `footer-nav-${Date.now()}`,
         label: '',
         href: '#',
+        openInNewTab: false,
         order: 0,
       },
     ],
@@ -401,6 +406,7 @@ const createEmptyLandingFormState = (): LandingFormState => ({
         id: `footer-legal-${Date.now()}`,
         label: '',
         href: '#',
+        openInNewTab: false,
         order: 0,
       },
     ],

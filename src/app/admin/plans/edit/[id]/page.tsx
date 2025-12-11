@@ -27,7 +27,7 @@ export default function EditPlanPage() {
       <div className="flex min-h-screen items-center justify-center">
         <div className="flex flex-col items-center gap-3">
           <Loader2 className="h-8 w-8 animate-spin text-primary" />
-          <p className="text-sm text-muted-foreground">{dict.admin.planForm.loading}</p>
+          <p className="text-sm text-muted-foreground">{(dict.admin.planForm as any).loading ?? 'Loading plan...'}</p>
         </div>
       </div>
     }>
@@ -103,14 +103,14 @@ function EditPlanPageContent() {
         <Button variant="ghost" asChild className="mb-6">
           <Link href={`/admin/plans?lang=${lang}`}>
             <ChevronLeft className="mr-2 h-4 w-4" />
-            {dict.admin.planForm.backToPlans}
+            {(dict.admin.planForm as any).backToPlans ?? 'Back to Plans'}
           </Link>
         </Button>
         <Alert variant="destructive">
           <AlertCircle className="h-4 w-4" />
-          <AlertTitle>{dict.admin.planForm.error}</AlertTitle>
+          <AlertTitle>{(dict.admin.planForm as any).error ?? 'Error'}</AlertTitle>
           <AlertDescription>
-            {error || dict.admin.planForm.notFound}
+            {error || ((dict.admin.planForm as any).notFound ?? 'Plan not found')}
           </AlertDescription>
         </Alert>
       </div>
@@ -123,7 +123,7 @@ function EditPlanPageContent() {
         <Button variant="ghost" asChild>
           <Link href={`/admin/plans?lang=${lang}`}>
             <ChevronLeft className="mr-2 h-4 w-4" />
-            {dict.admin.planForm.backToPlans}
+            {(dict.admin.planForm as any).backToPlans ?? 'Back to Plans'}
           </Link>
         </Button>
       </div>

@@ -492,13 +492,13 @@ function AdminProductsPageContent({ lang }: { lang: Locale }) {
                                                 <DropdownMenuTrigger asChild>
                                                     <Button variant="outline" size="sm" suppressHydrationWarning>
                                                         <MoreHorizontal className="h-4 w-4" />
-                                                        <span className="sr-only">{dict.admin.actions}</span>
+                                                        <span className="sr-only">{(dict.admin as any).actions ?? 'Actions'}</span>
                                                     </Button>
                                                 </DropdownMenuTrigger>
                                                 <DropdownMenuContent align="end">
                                                     <DropdownMenuItem asChild>
                                                         <Link href={`/admin/products/edit/${product.slug}?lang=${lang}`}>
-                                                            {dict.admin.editProduct}
+                                                            {(dict.admin as any).editProduct ?? 'Edit Product'}
                                                         </Link>
                                                     </DropdownMenuItem>
                                                     <DropdownMenuItem
@@ -528,13 +528,13 @@ function AdminProductsPageContent({ lang }: { lang: Locale }) {
                                             onCheckedChange={handleSelectAll}
                                         />
                                     </TableHead>
-                                    <TableHead>{dict.admin.product}</TableHead>
-                                    <TableHead>{dict.admin.price}</TableHead>
-                                    <TableHead>{dict.admin.productDiscountColumn}</TableHead>
-                                    <TableHead>{dict.admin.stockQuantity}</TableHead>
-                                    <TableHead>{dict.admin.featuredColumn}</TableHead>
-                                    <TableHead>{dict.admin.status}</TableHead>
-                                    <TableHead className="text-right">{dict.admin.actions}</TableHead>
+                                    <TableHead>{(dict.admin as any).product ?? 'Product'}</TableHead>
+                                    <TableHead>{(dict.admin as any).price ?? 'Price'}</TableHead>
+                                    <TableHead>{(dict.admin as any).productDiscountColumn ?? 'Discount'}</TableHead>
+                                    <TableHead>{(dict.admin as any).stockQuantity ?? 'Stock'}</TableHead>
+                                    <TableHead>{(dict.admin as any).featuredColumn ?? 'Featured'}</TableHead>
+                                    <TableHead>{(dict.admin as any).status ?? 'Status'}</TableHead>
+                                    <TableHead className="text-right">{(dict.admin as any).actions ?? 'Actions'}</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>

@@ -590,6 +590,17 @@ export function AppSettingsForm({ copy, locale }: AppSettingsFormProps) {
         autoAdvanceEnabled,
         ecommerceCommissionRate: settings.ecommerceCommissionRate ?? 0.08,
         teamLevelsVisible: parsedTeamLevelsVisible,
+        storeOwnerDiscountType: settings.storeOwnerDiscountType ?? 'percent',
+        storeOwnerDiscountValue: settings.storeOwnerDiscountValue ?? 0,
+        directSponsorCommissionRate: settings.directSponsorCommissionRate ?? 0.10,
+        networkCommissionRate: settings.networkCommissionRate ?? 0.05,
+        affiliateCommissionRate: settings.affiliateCommissionRate ?? 0.01,
+        affiliateDirectSponsorCommissionRate: settings.affiliateDirectSponsorCommissionRate ?? 0.05,
+        affiliateGeneralSponsorCommissionRate: settings.affiliateGeneralSponsorCommissionRate ?? 0.02,
+        rewardCreditLabelEn: settings.rewardCreditLabelEn ?? 'Reward Credits',
+        rewardCreditLabelEs: settings.rewardCreditLabelEs ?? 'Créditos de Recompensa',
+        freeProductLabelEn: settings.freeProductLabelEn ?? 'Free Product Value',
+        freeProductLabelEs: settings.freeProductLabelEs ?? 'Valor de Producto Gratis',
       };
 
       // Execute deletions first to avoid conflicts

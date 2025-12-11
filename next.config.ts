@@ -10,11 +10,6 @@ const nextConfig: NextConfig = {
     // To skip type checking temporarily, run: SKIP_TYPE_CHECK=1 npm run build
     ignoreBuildErrors: process.env.SKIP_TYPE_CHECK === '1',
   },
-  eslint: {
-    // ESLint errors are now checked during build
-    // To skip linting temporarily, run: SKIP_LINT=1 npm run build
-    ignoreDuringBuilds: process.env.SKIP_LINT === '1',
-  },
   // Desactivar todos los caches en desarrollo
   ...(process.env.NODE_ENV === 'development' && {
     // Desactivar cache de páginas en desarrollo
