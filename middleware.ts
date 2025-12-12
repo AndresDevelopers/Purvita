@@ -115,6 +115,39 @@ export async function middleware(request: NextRequest) {
     }
   }
 
+  // ✅ INTERNATIONALIZATION: Admin routes use query param (?lang=xx) instead of /[lang] prefix.
+  // Keep admin language in sync with NEXT_LOCALE cookie and ensure admin UI receives a lang param.
+  if (pathname.startsWith('/admin')) {
+    const url = request.nextUrl
+    const langParam = url.searchParams.get('lang')
+    const isSupportedLangParam =
+      !!langParam && SUPPORTED_LOCALES.includes(langParam as (typeof SUPPORTED_LOCALES)[number])
+
+    // If admin has a valid lang param, persist it as the user's preference.
+    if (isSupportedLangParam) {
+      const currentCookie = request.cookies.get(LOCALE_COOKIE_NAME)?.value
+      if (currentCookie !== langParam) {
+        localeToSave = langParam
+      }
+    }
+
+    // If admin has no lang param, redirect (GET/HEAD only) to include the preferred locale.
+    // This ensures admin and main site stay consistent.
+    if (!langParam && (request.method === 'GET' || request.method === 'HEAD')) {
+      const detectedLocale = getPreferredLocale(request)
+      const redirectUrl = new URL(request.url)
+      redirectUrl.searchParams.set('lang', detectedLocale)
+
+      const response = NextResponse.redirect(redirectUrl)
+      response.cookies.set(LOCALE_COOKIE_NAME, detectedLocale, {
+        maxAge: 60 * 60 * 24 * 365, // 1 year
+        path: '/',
+        sameSite: 'lax',
+      })
+      return response
+    }
+  }
+
   // ✅ SECURITY: Block access to debug pages in production
   if (process.env.NODE_ENV === 'production' && pathname.startsWith('/admin/debug')) {
     return NextResponse.redirect(new URL('/admin', request.url))

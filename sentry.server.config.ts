@@ -7,6 +7,13 @@ import * as Sentry from "@sentry/nextjs";
 // Only initialize if DSN is provided
 const DSN = process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN;
 
+const isSentryDebugEnabled =
+  process.env.SENTRY_DEBUG === 'true' || process.env.NEXT_PUBLIC_SENTRY_DEBUG === 'true';
+
+const isSentryLogsEnabled =
+  process.env.SENTRY_ENABLE_LOGS === 'true' ||
+  process.env.NEXT_PUBLIC_SENTRY_ENABLE_LOGS === 'true';
+
 if (DSN) {
   Sentry.init({
     dsn: DSN,
@@ -14,11 +21,11 @@ if (DSN) {
     // Use environment variable for sample rate, default to 20% in production
     tracesSampleRate: parseFloat(process.env.SENTRY_TRACES_SAMPLE_RATE || '0.2'),
 
-    // Enable logs to be sent to Sentry
-    enableLogs: true,
+    // Enable logs to be sent to Sentry (opt-in)
+    enableLogs: isSentryLogsEnabled,
 
-    // Setting this option to true will print useful information to the console while you're setting up Sentry.
-    debug: process.env.NODE_ENV === 'development',
+    // Print Sentry debug logs to the console (opt-in)
+    debug: isSentryDebugEnabled,
 
     // Configure environment
     environment: process.env.NODE_ENV || 'development',

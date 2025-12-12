@@ -1,6 +1,9 @@
 const DEFAULT_ENVIRONMENT =
   process.env.NEXT_PUBLIC_APP_ENV ?? process.env.NODE_ENV ?? 'development';
 
+const isSentryDebugEnabled = () =>
+  process.env.SENTRY_DEBUG === 'true' || process.env.NEXT_PUBLIC_SENTRY_DEBUG === 'true';
+
 const clampRate = (value: string | undefined, fallback: number): number => {
   const parsed = Number(value);
   if (Number.isFinite(parsed) && parsed >= 0 && parsed <= 1) {
@@ -23,7 +26,7 @@ export const createBrowserSentryOptions = () => ({
     process.env.NEXT_PUBLIC_SENTRY_REPLAYS_ON_ERROR_SAMPLE_RATE,
     1,
   ),
-  debug: process.env.NODE_ENV !== 'production',
+  debug: isSentryDebugEnabled(),
 });
 
 export const createServerSentryOptions = () => ({
@@ -31,7 +34,7 @@ export const createServerSentryOptions = () => ({
   enabled: Boolean(process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN),
   environment: DEFAULT_ENVIRONMENT,
   tracesSampleRate: clampRate(process.env.SENTRY_TRACES_SAMPLE_RATE, 0.1),
-  debug: process.env.NODE_ENV !== 'production',
+  debug: isSentryDebugEnabled(),
 });
 
 export const createEdgeSentryOptions = () => ({
@@ -39,5 +42,5 @@ export const createEdgeSentryOptions = () => ({
   enabled: Boolean(process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN),
   environment: DEFAULT_ENVIRONMENT,
   tracesSampleRate: clampRate(process.env.SENTRY_TRACES_SAMPLE_RATE, 0.1),
-  debug: process.env.NODE_ENV !== 'production',
+  debug: isSentryDebugEnabled(),
 });
