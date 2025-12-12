@@ -117,11 +117,8 @@ const AdminDashboardControllerContent = ({ lang }: AdminDashboardControllerProps
   const handleAddNote = useCallback(async (content: string, attachments: Attachment[]) => {
     setIsAddingNote(true);
     try {
-      const response = await fetch('/api/admin/notes', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ content, attachments }),
-      });
+      // ✅ SECURITY: Use adminApi.post() to automatically include CSRF token
+      const response = await adminApi.post('/api/admin/notes', { content, attachments });
 
       if (response.ok) {
         const data = await response.json();

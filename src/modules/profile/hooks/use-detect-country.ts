@@ -113,9 +113,7 @@ export function useDetectCountry(options: UseDetectCountryOptions = {}): UseDete
     });
 
     try {
-      console.log('[useDetectCountry] Detecting country from IP...');
       const result = await getOrCreateDetectionPromise();
-      console.log('[useDetectCountry] Detection result:', result);
 
       const normalized = normalizeCountry(result?.country ?? result?.countryCode ?? null);
 
@@ -123,15 +121,14 @@ export function useDetectCountry(options: UseDetectCountryOptions = {}): UseDete
         safeSet(() => {
           setCountry(normalized);
         });
-        console.log('[useDetectCountry] Country detected:', normalized, 'from', result?.source);
       } else {
-        console.warn('[useDetectCountry] No valid country code in response');
+        // Silently ignore if no country code found
       }
 
       hasDetectedRef.current = true;
     } catch (caught) {
       const resolvedError = caught instanceof Error ? caught : new Error('Failed to detect country');
-      console.error('[useDetectCountry] Detection error:', resolvedError);
+      // console.error('[useDetectCountry] Detection error:', resolvedError);
       safeSet(() => {
         setError(resolvedError);
       });

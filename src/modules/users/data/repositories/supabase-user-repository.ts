@@ -470,7 +470,7 @@ export class SupabaseUserRepository implements UserRepository {
         return [];
       }
 
-      const listUsers = adminApi.listUsers as (
+      const listUsers = adminApi.listUsers.bind(adminApi) as (
         params: { page: number; perPage: number },
       ) => Promise<{
         data?: { users?: SupabaseAuthUser[] } | null;
