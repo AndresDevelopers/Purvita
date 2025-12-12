@@ -11,7 +11,7 @@ const CreateTransactionSchema = z.object({
     currency: z.string().default('USD'),
     description: z.string(),
     isTest: z.boolean().optional(),
-    metadata: z.record(z.unknown()).optional(),
+    metadata: z.record(z.string(), z.unknown()).optional(),
 });
 
 export async function POST(request: Request) {

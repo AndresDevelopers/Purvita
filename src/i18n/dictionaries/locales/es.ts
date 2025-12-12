@@ -3,8 +3,8 @@ import { sanitizeAppNameForEmailDomain } from '../default';
 
 export const createEsDictionary = (
   appName: string,
-): DictionaryOverrides =>
-  ({
+): DictionaryOverrides => {
+  const dictionary = {
 
 
 
@@ -2593,7 +2593,6 @@ export const createEsDictionary = (
             level2: "Socios activos Nivel 2",
             helper: "Alcanza 2 socios directos y 4 en tu segundo nivel para desbloquear la Fase 2.",
           },
-          },
 
           affiliate: {
 
@@ -3036,6 +3035,8 @@ export const createEsDictionary = (
 
 
       },
+
+    },
 
 
 
@@ -5689,40 +5690,6 @@ export const createEsDictionary = (
           overlayHelper:
 
             "Controla qué tan oscura será la superposición sobre la imagen de fondo (0% = transparente, 100% = opaca).",
-
-          social: {
-
-            title: "Redes sociales",
-
-            description: "Comparte los perfiles donde tu audiencia puede seguir las novedades.",
-
-            add: "Agregar enlace social",
-
-            remove: "Eliminar enlace",
-
-            platform: "Plataforma",
-
-            platformPlaceholder: "Selecciona una plataforma",
-
-            platforms: {
-
-              facebook: "Facebook",
-
-              instagram: "Instagram",
-
-              youtube: "YouTube",
-
-              x: "X (Twitter)",
-
-              whatsapp: "WhatsApp",
-
-            },
-
-            url: "URL del perfil",
-
-            urlPlaceholder: "https://instagram.com/tumarca",
-
-          },
 
           access: {
 
@@ -8419,7 +8386,10 @@ export const createEsDictionary = (
         summaryTitle: "📊 Resumen:",
         totalSales: "Ventas totales: {{amount}}",
         affiliateRate: "Comisión afiliado: {{rate}}%",
-        referrerRate: "Comisión referidor: {{rate}}%"
-      }
+        referrerRate: "Comisión referidor: {{rate}}%",
+      },
     },
-  } satisfies DictionaryOverrides);
+  };
+
+  return dictionary as DictionaryOverrides;
+};

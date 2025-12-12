@@ -30,7 +30,7 @@ export const POST = withAuth<any>(
 
       if (!parsed.success) {
         return NextResponse.json(
-          { error: 'Invalid event data', details: parsed.error.errors },
+          { error: 'Invalid event data', details: parsed.error.issues },
           { status: 400 }
         );
       }

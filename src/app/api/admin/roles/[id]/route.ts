@@ -91,7 +91,7 @@ export const PUT = withAdminPermission('manage_roles', async (request, context) 
       return NextResponse.json(
         {
           error: ErrorMessages.VALIDATION_ERROR,
-          details: error.errors.map(err => ({
+          details: error.issues.map(err => ({
             field: err.path.join('.'),
             message: err.message,
           }))

@@ -1,16 +1,7 @@
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
-import { FlatCompat } from '@eslint/eslintrc';
 import tseslint from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
+import nextPlugin from '@next/eslint-plugin-next';
 import reactHooks from 'eslint-plugin-react-hooks';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
 
 const eslintConfig = [
   // Project ignores
@@ -25,8 +16,8 @@ const eslintConfig = [
       'src/app/__tests__/__fixtures__/**/*.js',
     ],
   },
-  // Next.js recommended rules (this should work with the plugin detection)
-  ...compat.extends('next/core-web-vitals', 'next'),
+  // Next.js rules (flat config)
+  (nextPlugin.flatConfig && nextPlugin.flatConfig.coreWebVitals) ? nextPlugin.flatConfig.coreWebVitals : nextPlugin.configs.recommended,
   // TypeScript support
   {
     files: ['**/*.ts', '**/*.tsx'],

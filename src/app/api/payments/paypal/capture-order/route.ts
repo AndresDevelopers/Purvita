@@ -14,7 +14,7 @@ import { requireCsrfToken } from '@/lib/security/csrf-protection';
 const CaptureOrderSchema = z.object({
   orderId: z.string(),
   isTest: z.boolean().optional(),
-  metadata: z.record(z.unknown()).optional(),
+  metadata: z.record(z.string(), z.unknown()).optional(),
 });
 
 /**

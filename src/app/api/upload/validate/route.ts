@@ -32,7 +32,7 @@ const FileValidationSchema = z.object({
   size: z.number().positive('File size must be positive'),
   type: z.string().min(1, 'File type is required'),
   category: z.enum(['image', 'video', 'document', 'avatar'], {
-    errorMap: () => ({ message: 'Invalid category' }),
+    message: 'Invalid category',
   }),
   width: z.number().positive().optional(),
   height: z.number().positive().optional(),
@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
         {
           valid: false,
           error: 'Invalid request data',
-          details: validation.error.errors,
+          details: validation.error.issues,
         },
         { status: 400 }
       );

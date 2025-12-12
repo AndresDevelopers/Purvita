@@ -52,7 +52,7 @@ export const getAllClassVideos = async (filters?: { visibility?: string[]; level
     console.error('🎥 getAllClassVideos: Error completo:', error);
 
     if (error instanceof ZodError) {
-      console.error('🎥 getAllClassVideos: Error de validación Zod:', error.errors);
+      console.error('🎥 getAllClassVideos: Error de validación Zod:', error.issues);
       throw new Error('Invalid class video data received');
     }
 

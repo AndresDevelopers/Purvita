@@ -384,7 +384,7 @@ const normalizeProductIds = (value: unknown): string[] => {
 const ProductExperienceSchema = z
   .object({
     locales: z
-      .record(LocaleSchema, ProductExperienceLocaleSchema)
+      .record(z.string(), ProductExperienceLocaleSchema)
       .optional()
       .default({}),
     rating: z

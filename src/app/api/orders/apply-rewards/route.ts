@@ -15,7 +15,7 @@ const { rateLimitService } = createSecurityModule();
 const ApplyRewardsSchema = z.object({
   orderId: z.string().uuid('Invalid order ID'),
   rewardType: z.enum(['free_product', 'store_credit'], {
-    errorMap: () => ({ message: 'Invalid reward type. Must be "free_product" or "store_credit"' })
+    message: 'Invalid reward type. Must be "free_product" or "store_credit"',
   }),
 });
 
@@ -135,7 +135,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {
           error: 'Validation error',
-          message: error.errors[0].message
+          message: error.issues[0]?.message ?? 'Validation error'
         },
         { status: 400 }
       );

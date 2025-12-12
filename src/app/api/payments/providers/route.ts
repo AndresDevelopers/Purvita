@@ -31,8 +31,12 @@ export async function GET() {
       providers.push({
         provider: 'wallet',
         mode: 'production',
+        functionality: 'payment',
         clientId: null,
         publishableKey: null,
+        availableOnAffiliateCheckout: true,
+        availableOnMlmCheckout: true,
+        availableOnMainStore: true,
         metadata: {
           type: 'wallet',
           walletBalanceCents: balanceCents,

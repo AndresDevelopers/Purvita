@@ -60,7 +60,7 @@ export async function GET(req: NextRequest) {
       const response = NextResponse.json(
         {
           error: 'Invalid query parameters',
-          message: error instanceof z.ZodError ? error.errors[0].message : 'Invalid affiliateId',
+          message: error instanceof z.ZodError ? (error.issues[0]?.message ?? 'Invalid affiliateId') : 'Invalid affiliateId',
         },
         { status: 400 }
       );

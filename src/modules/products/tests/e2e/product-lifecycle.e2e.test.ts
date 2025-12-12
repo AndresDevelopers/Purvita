@@ -141,6 +141,7 @@ const baseProduct = {
   name: "Smart Trainer",
   description: "Adaptive resistance trainer",
   price: 199,
+  discount_visibility: [...(["main_store", "affiliate_store", "mlm_store"] as const)],
   stock_quantity: 40,
   images: [],
   is_featured: true,

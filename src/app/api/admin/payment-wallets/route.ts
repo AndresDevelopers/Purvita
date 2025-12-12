@@ -9,7 +9,7 @@ import { SecurityAuditLogger, SecurityEventType, SecurityEventSeverity, extractR
 const PaymentWalletSchema = z.object({
   user_id: z.string().uuid('Invalid user ID'),
   provider: z.enum(['stripe', 'paypal'], {
-    errorMap: () => ({ message: 'Provider must be either stripe or paypal' })
+    message: 'Provider must be either stripe or paypal',
   }),
   account_id: z.string().min(1, 'Account ID is required').max(100, 'Account ID too long'),
   currency: z.string().length(3, 'Currency must be a 3-letter code'),
@@ -57,7 +57,7 @@ export const POST = withAdminPermission('manage_payments', async (req: NextReque
       return NextResponse.json(
         {
           error: 'Invalid request data',
-          details: validation.error.errors
+          details: validation.error.issues
         },
         { status: 400 }
       );

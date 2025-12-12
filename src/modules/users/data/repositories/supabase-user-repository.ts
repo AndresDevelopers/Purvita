@@ -376,6 +376,9 @@ export class SupabaseUserRepository implements UserRepository {
       role_name: (profile as any).role_name,
       status,
       pay: typeof payValue === 'boolean' ? payValue : false,
+      show_reviews: typeof coerceBoolean((profile as any).show_reviews) === 'boolean'
+        ? (coerceBoolean((profile as any).show_reviews) as boolean)
+        : false,
       referral_code: pickString(profile.referral_code),
       referred_by: pickString(profile.referred_by),
       team_count: teamCount,

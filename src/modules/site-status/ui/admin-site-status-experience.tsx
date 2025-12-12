@@ -801,7 +801,7 @@ export function AdminSiteStatusExperience({ lang }: AdminSiteStatusExperiencePro
 
     try {
       // Helper to normalize SEO field values
-      const normalizeSeoField = (value: SeoFieldValue): string | Partial<Record<'en' | 'es', string>> => {
+      const normalizeSeoField = (value: SeoFieldValue): string | Record<'en' | 'es', string> => {
         if (!value) return '';
 
         if (typeof value === 'string') {
@@ -826,7 +826,7 @@ export function AdminSiteStatusExperience({ lang }: AdminSiteStatusExperiencePro
         return '';
       };
 
-      const normalizeOptionalSeoField = (value: SeoFieldValue): string | Partial<Record<'en' | 'es', string>> | null => {
+      const normalizeOptionalSeoField = (value: SeoFieldValue): string | Record<'en' | 'es', string> | null => {
         if (!value) return null;
 
         if (typeof value === 'string') {
@@ -836,8 +836,8 @@ export function AdminSiteStatusExperience({ lang }: AdminSiteStatusExperiencePro
 
         if (typeof value === 'object' && value !== null) {
           const obj = value as Record<string, string | null>;
-          const en = obj.en?.trim() || null;
-          const es = obj.es?.trim() || null;
+          const en = obj.en?.trim() || '';
+          const es = obj.es?.trim() || '';
 
           // If both are empty, return null
           if (!en && !es) return null;
@@ -845,11 +845,8 @@ export function AdminSiteStatusExperience({ lang }: AdminSiteStatusExperiencePro
           // If both are the same, return as string
           if (en === es) return en;
 
-          // Return as multilingual object with only non-null values
-          const result: Partial<Record<'en' | 'es', string>> = {};
-          if (en) result.en = en;
-          if (es) result.es = es;
-          return result;
+          // Return as multilingual object with required keys
+          return { en, es };
         }
 
         return null;

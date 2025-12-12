@@ -22,7 +22,7 @@ export const POST = withAuth<any>(async (request) => {
     const parsed = PrivacyConsentSchema.safeParse(body);
     if (!parsed.success) {
       return NextResponse.json(
-        { error: 'Invalid consent data', details: parsed.error.errors },
+        { error: 'Invalid consent data', details: parsed.error.issues },
         { status: 400 }
       );
     }

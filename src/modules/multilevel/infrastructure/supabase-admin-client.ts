@@ -12,9 +12,7 @@ export const getSupabaseAdminClient = (): SupabaseClient => {
 
       if (!client) {
         const missingKeyIssue: ZodIssue = {
-          code: 'invalid_type',
-          expected: 'string',
-          received: 'undefined',
+          code: 'custom',
           path: ['SUPABASE_SERVICE_ROLE_KEY'],
           message: 'Required',
         };

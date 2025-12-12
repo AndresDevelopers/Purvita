@@ -868,7 +868,7 @@ export class ProfileEarningsService {
 
     const schema = z.object({
       thresholdCents: z
-        .number({ invalid_type_error: 'thresholdCents must be a number' })
+        .number({ message: 'thresholdCents must be a number' })
         .int('Threshold must be a whole number of cents')
         .min(minimumCents, `Threshold must be at least $${(minimumCents / 100).toFixed(2)}`)
         .max(

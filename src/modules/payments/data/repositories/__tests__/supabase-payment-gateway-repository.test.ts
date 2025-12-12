@@ -12,6 +12,11 @@ const buildExistingRecord = (overrides: Partial<PaymentGatewayRecord> = {}): Pay
   provider: 'stripe',
   status: 'active',
   is_active: true,
+  functionality: 'payment',
+  mode: 'production',
+  available_on_affiliate_checkout: true,
+  available_on_mlm_checkout: true,
+  available_on_main_store: true,
   credentials: {
     clientId: null,
     publishableKey: 'pk_live_existing',

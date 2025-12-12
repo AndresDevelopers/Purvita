@@ -66,7 +66,7 @@ export const POST = withAdminPermission('manage_roles', async (request) => {
     
     if (error instanceof ZodError) {
       // ✅ SECURITY: Sanitize Zod error messages to prevent information disclosure
-      const sanitizedErrors = error.errors.map(err => ({
+      const sanitizedErrors = error.issues.map(err => ({
         field: err.path.join('.'),
         message: err.message,
       }));

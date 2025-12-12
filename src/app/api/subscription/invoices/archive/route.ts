@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
     console.error('[subscription-invoices] Failed to archive invoices', error);
 
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: 'Invalid request data', details: error.errors }, { status: 400 });
+      return NextResponse.json({ error: 'Invalid request data', details: error.issues }, { status: 400 });
     }
 
     const message = error instanceof Error ? error.message : 'Failed to archive invoices';

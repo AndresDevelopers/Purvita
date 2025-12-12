@@ -9,5 +9,9 @@ export const sentryBuildOptions: Parameters<typeof import('@sentry/nextjs').with
   },
   // Suprimir advertencias de webpack
   widenClientFileUpload: true,
-  disableLogger: true,
+  webpack: {
+    treeshake: {
+      removeDebugLogging: true,
+    },
+  },
 };

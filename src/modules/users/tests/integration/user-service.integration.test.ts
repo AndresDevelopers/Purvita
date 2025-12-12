@@ -195,6 +195,7 @@ describe("Integration: user service", () => {
       email: "alex@example.com",
       referral_code: "alex123",
       pay: true,
+      show_reviews: false,
       role: "member",
       status: "active",
       commission_rate: 0.1,

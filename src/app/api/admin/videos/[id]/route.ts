@@ -41,7 +41,7 @@ export async function GET(request: Request, { params }: RouteParams) {
 
     // Check if it's a Zod validation error
     if (error.name === 'ZodError') {
-      console.error('Zod validation error:', error.errors);
+      console.error('Zod validation error:', error.issues);
       return NextResponse.json(
         {
           error: 'Database schema mismatch. Please run the migration to add category and visibility columns to class_videos table.',

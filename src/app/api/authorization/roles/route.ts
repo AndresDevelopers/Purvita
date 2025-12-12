@@ -71,7 +71,7 @@ export const POST = withPermission('manage_roles', async (request) => {
       return NextResponse.json(
         {
           error: 'Validation error',
-          details: error.errors.map(err => ({
+          details: error.issues.map(err => ({
             field: err.path.join('.'),
             message: err.message,
           }))

@@ -23,7 +23,7 @@ const QuerySchema = z.object({
     .optional(),
   start_date: z.string().datetime().optional(),
   end_date: z.string().datetime().optional(),
-  decrypt_ips: z.enum(['true', 'false']).transform(val => val === 'true').default('false'),
+  decrypt_ips: z.enum(['true', 'false']).default('false').transform((val) => val === 'true'),
 });
 
 export const GET = withAdminPermission('view_audit_logs', async (request: NextRequest) => {
@@ -45,7 +45,7 @@ export const GET = withAdminPermission('view_audit_logs', async (request: NextRe
 
     if (!queryResult.success) {
       return NextResponse.json(
-        { error: 'Invalid query parameters', details: queryResult.error.errors },
+        { error: 'Invalid query parameters', details: queryResult.error.issues },
         { status: 400 }
       );
     }

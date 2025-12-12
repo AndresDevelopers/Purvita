@@ -46,7 +46,7 @@ const RewardsUpdateSchema = z.object({
 
 const AdminUpdateUserSchema = z
     .object({
-        profile: z.record(z.unknown()).optional(),
+        profile: z.record(z.string(), z.unknown()).optional(),
         subscription: SubscriptionUpdateSchema.optional(),
         wallet: WalletUpdateSchema.optional(),
         networkEarnings: NetworkEarningsUpdateSchema.optional(),

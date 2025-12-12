@@ -6,6 +6,11 @@ const buildRecord = (overrides: Partial<PaymentGatewayRecord> = {}): PaymentGate
   provider: 'stripe',
   status: 'active',
   is_active: true,
+  functionality: 'payment',
+  mode: 'production',
+  available_on_affiliate_checkout: true,
+  available_on_mlm_checkout: true,
+  available_on_main_store: true,
   credentials: {
     clientId: 'acct_live',
     publishableKey: 'pk_live_value',

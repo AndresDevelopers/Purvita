@@ -47,7 +47,7 @@ export const PUT = withAuth<any>(async (request) => {
     const parsed = AnalyticsConfigUpdateSchema.safeParse(body);
     if (!parsed.success) {
       return NextResponse.json(
-        { error: 'Invalid config data', details: parsed.error.errors },
+        { error: 'Invalid config data', details: parsed.error.issues },
         { status: 400 }
       );
     }

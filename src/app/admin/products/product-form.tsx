@@ -329,7 +329,7 @@ export function ProductForm({ lang, product, onSuccess }: ProductFormProps) {
   }, []);
 
   const buildExperiencePayload = useCallback(() => {
-    const localePayload = supportedLocales.reduce((acc, locale) => {
+    const normalizedLocales = supportedLocales.reduce((acc, locale) => {
       const current = experienceState.locales[locale] ?? emptyLocaleState();
       const normalized: Partial<ExperienceLocaleState> = {};
 
@@ -367,12 +367,19 @@ export function ProductForm({ lang, product, onSuccess }: ProductFormProps) {
         normalized.insights = insights;
       }
 
-      if (Object.keys(normalized).length > 0) {
-        acc[locale] = normalized;
-      }
+      acc[locale] = normalized;
 
       return acc;
-    }, {} as Partial<Record<Locale, Partial<ExperienceLocaleState>>>);
+    }, {} as Record<Locale, Partial<ExperienceLocaleState>>);
+
+    const hasAnyLocaleContent = supportedLocales.some((locale) => Object.keys(normalizedLocales[locale]).length > 0);
+
+    const localePayload: Record<Locale, Partial<ExperienceLocaleState>> | undefined = hasAnyLocaleContent
+      ? {
+          en: normalizedLocales.en ?? {},
+          es: normalizedLocales.es ?? {},
+        }
+      : undefined;
 
     const averageValue = Number(experienceState.rating.average);
     const countValue = Number(experienceState.rating.count);

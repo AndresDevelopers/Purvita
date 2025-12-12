@@ -183,6 +183,7 @@ const createLandingState = (landing: LandingContent): LandingFormState => ({
   hero: {
     title: landing.hero.title,
     subtitle: landing.hero.subtitle,
+    style: landing.hero.style ?? 'default',
     backgroundImageUrl: landing.hero.backgroundImageUrl ?? '',
   },
   about: {
@@ -272,6 +273,7 @@ const createEmptyLandingFormState = (): LandingFormState => ({
   hero: {
     title: '',
     subtitle: '',
+    style: 'default',
     backgroundImageUrl: '',
   },
   about: {

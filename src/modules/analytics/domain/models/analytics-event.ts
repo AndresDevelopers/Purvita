@@ -74,7 +74,7 @@ export const AnalyticsEventParams = z.object({
   search_term: z.string().optional(),
 
   // Custom parameters
-  custom_data: z.record(z.any()).optional()
+  custom_data: z.record(z.string(), z.any()).optional()
 });
 
 export type AnalyticsEventParams = z.infer<typeof AnalyticsEventParams>;

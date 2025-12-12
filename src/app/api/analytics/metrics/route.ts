@@ -26,7 +26,7 @@ export const GET = withAuth<any>(async (request) => {
     const parsed = MetricsQuerySchema.safeParse(query);
     if (!parsed.success) {
       return NextResponse.json(
-        { error: 'Invalid query parameters', details: parsed.error.errors },
+        { error: 'Invalid query parameters', details: parsed.error.issues },
         { status: 400 }
       );
     }

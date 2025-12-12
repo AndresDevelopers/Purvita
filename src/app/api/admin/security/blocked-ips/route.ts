@@ -6,7 +6,16 @@ import { requireCsrfToken } from '@/lib/security/csrf-protection';
 import { SecurityAuditLogger, SecurityEventType, SecurityEventSeverity, extractRequestMetadata } from '@/lib/security/audit-logger';
 
 const BlockIPSchema = z.object({
-  ip_address: z.string().ip(),
+  ip_address: z
+    .string()
+    .refine(
+      (value) => {
+        const trimmed = value.trim();
+        const ipv4 = /^(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(?:\.(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}$/;
+        return ipv4.test(trimmed);
+      },
+      { message: 'Invalid IP address' },
+    ),
   reason: z.string().min(1),
   expires_at: z.string().datetime().nullable().optional(),
   notes: z.string().nullable().optional(),
@@ -106,7 +115,7 @@ export const POST = withAdminPermission('manage_security', async (request) => {
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: 'Invalid request data', details: error.errors },
+        { error: 'Invalid request data', details: error.issues },
         { status: 400 }
       );
     }

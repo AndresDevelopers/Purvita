@@ -25,7 +25,7 @@ const ChargeRequestSchema = z.object({
   currency: z.string().default(PAYMENT_CONSTANTS.CURRENCIES.DEFAULT),
   description: z.string().optional(),
   cartItems: z.array(CartItemSchema).optional(),
-  metadata: z.record(z.unknown()).optional(),
+  metadata: z.record(z.string(), z.unknown()).optional(),
   deviceFingerprint: z.string().optional(), // Browser fingerprint for fraud detection
 });
 

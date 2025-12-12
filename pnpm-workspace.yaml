@@ -2,4 +2,4 @@ packages:
   - "**"
 
 dangerouslyAllowAllBuilds: true
-minimumReleaseAge: 1440
+minimumReleaseAge: 0

@@ -76,7 +76,7 @@ export const AdvancedMetricsSchema = z.object({
   cohorts: z.array(z.object({
     cohort_date: z.string(),
     users: z.number(),
-    retention: z.record(z.number()) // day -> retention %
+    retention: z.record(z.string(), z.number()) // day -> retention %
   })).optional(),
 
   // Customer Lifetime Value

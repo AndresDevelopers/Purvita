@@ -325,6 +325,7 @@ const baseProduct = {
   name: "Smart Mat",
   description: "Connected training mat",
   price: 120,
+  discount_visibility: [...(["main_store", "affiliate_store", "mlm_store"] as const)],
   stock_quantity: 25,
   images: [],
   is_featured: true,

@@ -300,7 +300,7 @@ export async function validatePaymentAmount(
   if (!validation.success) {
     return {
       valid: false,
-      error: validation.error.errors[0]?.message || 'Invalid payment amount',
+      error: validation.error.issues[0]?.message || 'Invalid payment amount',
     };
   }
 

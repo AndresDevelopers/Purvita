@@ -20,7 +20,7 @@ const BlacklistEntrySchema = z.object({
   ]),
   expiresAt: z.string().datetime().optional(),
   notes: z.string().optional(),
-  evidence: z.record(z.unknown()).optional(),
+  evidence: z.record(z.string(), z.unknown()).optional(),
 });
 
 /**

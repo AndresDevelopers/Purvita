@@ -61,7 +61,7 @@ export const PUT = withAdminPermission('manage_settings', async (req: NextReques
       return NextResponse.json(
         {
           error: 'Invalid request data',
-          details: validation.error.errors,
+          details: validation.error.issues,
         },
         { status: 400 }
       );

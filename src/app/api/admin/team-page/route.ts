@@ -65,7 +65,7 @@ export const POST = withAdminPermission('access_admin_panel', async (request) =>
     const parsed = RequestSchema.safeParse(body);
     if (!parsed.success) {
       return NextResponse.json(
-        { error: 'Invalid request data', details: parsed.error.errors },
+        { error: 'Invalid request data', details: parsed.error.issues },
         { status: 400 },
       );
     }

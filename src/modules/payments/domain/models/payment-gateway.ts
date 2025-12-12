@@ -110,7 +110,7 @@ export const PaymentGatewayPublicInfoSchema = z.object({
   availableOnMlmCheckout: z.boolean().default(true),
   availableOnMainStore: z.boolean().default(true),
   metadata: z
-    .record(z.unknown())
+    .record(z.string(), z.unknown())
     .optional()
     .transform((value) => (value && Object.keys(value).length === 0 ? undefined : value)),
 });

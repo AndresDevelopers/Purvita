@@ -30,7 +30,7 @@ export const TestHistoryItemSchema = z.object({
   error: z.string().optional(),
   createdAt: z.string().datetime(),
   completedAt: z.string().datetime().optional(),
-  debugInfo: z.record(z.any()).optional(),
+  debugInfo: z.record(z.string(), z.any()).optional(),
 });
 
 export const PaymentCredentialsSchema = z.discriminatedUnion('provider', [
@@ -53,7 +53,7 @@ export const PaymentCredentialsSchema = z.discriminatedUnion('provider', [
 export const ValidationResultSchema = z.object({
   isValid: z.boolean(),
   errors: z.array(z.string()),
-  details: z.record(z.any()).optional(),
+  details: z.record(z.string(), z.any()).optional(),
 });
 
 export const TestFormParamsSchema = z.object({

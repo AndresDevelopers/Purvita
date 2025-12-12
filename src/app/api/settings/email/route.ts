@@ -42,7 +42,7 @@ export const POST = withAuth<any>(async (request) => {
       return NextResponse.json(
         { 
           error: 'Validation failed', 
-          details: validationResult.error.errors 
+          details: validationResult.error.issues 
         },
         { status: 400 }
       );
